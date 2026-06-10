@@ -1,0 +1,93 @@
+integer:int;
+real:double;
+character:char;
+auxInt:int;
+auxDouble:double;
+auxChar:char;
+auxArray:[10]int;
+auxStruct:struct { x:int; y:int; };
+
+def f(a:int, b:double) -> int: {
+    return a;
+}
+
+def main() -> None: {
+
+    # ---- mustBeBuiltIn ----
+    input integer;          # OK
+    input auxArray;         # Error: array no es built-in
+    input auxStruct;        # Error: struct no es built-in
+    print integer;          # OK
+    print auxArray;         # Error: array no es built-in
+    print auxStruct;        # Error: struct no es built-in
+
+    # ---- mustBeLogical ----
+    if integer: {           # OK
+        print integer;
+    }
+    if real: {              # Error: double no es lógico
+        print integer;
+    }
+    while auxStruct: {      # Error: struct no es lógico
+        print integer;
+    }
+
+    # ---- arithmetic unario ----
+    auxInt = -integer;      # OK: -int = int
+    auxDouble = -real;      # OK: -double = double
+    auxInt = -character;    # OK: -char = int
+    auxInt = -auxArray;     # Error: array no soporta aritmética
+
+    # ---- arithmetic binario ----
+    auxInt = integer + integer;     # OK: int+int = int
+    auxDouble = integer + real;     # OK: int+double = double
+    auxInt = integer + real;        # Error: double no puede promocionarse a int
+    auxInt = character + integer;   # OK: char+int = int
+    auxDouble = character + real;   # OK: char+double = double
+    auxInt = character + character; # OK: char+char = int
+    auxInt = integer + auxArray;    # Error: array no soporta aritmética
+
+    # ---- logic binario ----
+    auxInt = integer && integer;    # OK
+    auxInt = integer && real;       # Error: double no es lógico
+    auxInt = integer && auxStruct;  # Error: struct no es lógico
+
+    # ---- logic unario ----
+    auxInt = !integer;      # OK
+    auxInt = !real;         # Error: double no soporta negación
+    auxInt = !auxArray;     # Error: array no soporta negación
+
+    # ---- mustPromoteTo ----
+    auxInt = integer;       # OK
+    auxDouble = integer;    # OK: int puede promocionarse a double
+    auxInt = real;          # Error: double no puede promocionarse a int
+    auxChar = integer;      # Error: int no puede promocionarse a char
+
+    # ---- canBeCastTo ----
+    auxInt = (int)integer;      # OK
+    auxDouble = (double)integer; # OK
+    auxChar = (char)integer;     # OK
+    auxInt = (int)real;          # OK
+    auxInt = (int)auxArray;      # Error: array no puede castearse
+
+    # ---- comparison ----
+    auxInt = integer == integer;    # OK
+    auxInt = integer == real;       # Error: no se puede comparar int con double
+    auxInt = auxStruct == integer;  # Error: no se puede comparar struct con int
+
+    # ---- squareBrackets ----
+    auxInt = auxArray[0];       # OK
+    auxInt = auxArray[real];    # Error: índice debe ser int
+    auxInt = integer[0];        # Error: int no es un array
+
+    # ---- dot ----
+    auxInt = auxStruct.x;       # OK
+    auxInt = auxStruct.z;       # Error: campo z no existe
+    auxInt = integer.x;         # Error: int no es un struct
+
+    # ---- parenthesis ----
+    auxInt = f(integer, real);      # OK
+    auxInt = f(integer);            # Error: número incorrecto de argumentos
+    auxInt = f(real, real);         # Error: double no puede promocionarse a int (1er param)
+    auxInt = integer(3);            # Error: int no es una función
+}

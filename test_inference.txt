@@ -1,0 +1,106 @@
+ r: double;
+  c: char;
+  i: int;
+
+  pair: struct {
+      x: int;
+      y: double;
+  };
+
+  arr: [3]int;
+
+  def triple(n: int) -> double: {
+      return n * 3.0;
+  }
+
+  def charToInt(ch: char) -> int: {
+      return ch;
+  }
+
+  def main() -> None: {
+      i = 2;
+      c = 'A';
+      r = 0.5;
+
+      # Test 1: char + int -> int  (b2i en c)
+      print c + i, '\n';
+
+      # Test 2: int * double -> double  (i2f en i)
+      print i * r, '\n';
+
+      # Test 3: char * double -> double  (b2i + i2f en c, conversion encadenada)
+      print c * r, '\n';
+
+      # Test 4: cast double -> int  (f2i)
+      print (int)r, '\n';
+
+      # Test 5: cast int -> char  (i2b)
+      c = (char)(i + 64);
+      print c, '\n';
+
+      # Test 6: asignacion double = int  (i2f en store)
+      r = i;
+      print r, '\n';
+
+      # Test 7: comparacion int < double  (promueve a float, lef)
+      print i < 3.0, '\n';
+
+      # Test 8: comparacion char == int  (b2i en c, eqi)
+      print c == 66, '\n';
+
+      # Test 9: campo struct double * campo int -> double  (i2f en pair.x)
+      pair.x = 10;
+      pair.y = 2.5;
+      print pair.y * pair.x, '\n';
+
+      # Test 10: llamada funcion int->double (return n*3.0)
+      print triple(3), '\n';
+
+      # Test 11: llamada funcion char->int (return ch con b2i)
+      print charToInt('Z'), '\n';
+
+      # Test 12: resultado de funcion en aritmetica  (int+int)
+      print charToInt('Z') + i, '\n';
+
+      # Test 13: menos unario int
+      print -i, '\n';
+
+      # Test 14: menos unario double
+      print -r, '\n';
+
+      # Test 15: (char+int)*double -> double encadenado  (b2i -> addi -> i2f -> mulf)
+      print (c + 1) * r, '\n';
+
+      # --- Tests de conversion implicita: casos que faltan ---
+
+      # Setup del array (offsets: arr en offset 13, 6 bytes)
+      arr[0] = 100;
+      arr[1] = 200;
+      arr[2] = 300;
+
+      # Test 16: array con indice int -> correcto
+      # Esperado: 300  (i=2, arr[2]=300)
+      print arr[i], '\n';
+
+      # Test 17: array con resultado de aritmetica char op char -> int -> correcto
+      # c='B'=66, 'A'=65, c-'A'=1 -> arr[1]=200
+      # Esperado: 200
+      print arr[c - 'A'], '\n';
+
+      # Test 18: menos unario sobre char
+      # Correcto: -66  (0 - 'B')
+      # Actual:   MAPL incorrecto, falta b2i antes de subi
+      print -c, '\n';
+
+      # Test 19: logica int && char (char en la derecha, pasa el type-checker)
+      # Correcto: 1  (1 es verdadero, 'B'=66 es no-nulo)
+      # Actual:   MAPL incorrecto, falta b2i para el char
+      print 1 && c, '\n';
+
+      # Los siguientes fallan en el type-checker.
+      # Descomentar tras implementar las correcciones:
+      # print -c + 1, '\n';      # test -c standalone antes de aritmetica
+      # print !c, '\n';          # CharType no implementa logic(Loc)
+      # print c && 1, '\n';      # CharType no implementa logic(Type,Loc)
+      # print arr[c], '\n';      # squareBrackets solo acepta IntType
+  }

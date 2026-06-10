@@ -1,0 +1,93 @@
+
+#source "input_promotion.txt"
+
+
+	' * Invocation to main function
+	call main
+halt
+
+
+#line 1
+
+main:
+	' * Parameters
+	' * Local variables
+	' * char c (offset -1)
+	' * int i (offset -3)
+	enter 3
+
+#line 5
+	' * Assignment
+	push bp
+	pushi -1
+	addi
+	pushb 97
+	storeb
+
+
+#line 8
+	' * Assignment
+	push bp
+	pushi -3
+	addi
+	pushi 0
+	push bp
+	pushi -1
+	addi
+	loadb
+	b2i
+	subi
+	storei
+
+
+#line 11
+	' * Assignment
+	push bp
+	pushi -3
+	addi
+	push bp
+	pushi -1
+	addi
+	loadb
+	b2i
+	not
+	storei
+
+
+#line 14
+	' * Assignment
+	push bp
+	pushi -3
+	addi
+	push bp
+	pushi -1
+	addi
+	loadb
+	b2i
+	push bp
+	pushi -1
+	addi
+	loadb
+	b2i
+	and
+	storei
+
+
+#line 17
+	' * Assignment
+	push bp
+	pushi -3
+	addi
+	push bp
+	pushi -1
+	addi
+	loadb
+	b2i
+	push bp
+	pushi -3
+	addi
+	loadi
+	or
+	storei
+
+	ret 0, 3, 0

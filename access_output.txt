@@ -1,0 +1,224 @@
+
+#source "access.txt"
+
+	' * array[int] arr (offset 0)
+	' * array[char] chars (offset 20)
+
+	' * Invocation to main function
+	call main
+halt
+
+
+#line 4
+
+main:
+	' * Parameters
+	' * Local variables
+	' * int i (offset -2)
+	' * char c (offset -3)
+	enter 3
+
+#line 9
+	' * Assignment
+	pusha 0
+	pushi 0
+	pushi 2
+	muli
+	addi
+	pushi 7
+	storei
+
+
+#line 10
+	' * Assignment
+	pusha 0
+	pushi 2
+	pushi 2
+	muli
+	addi
+	pushi 3
+	storei
+
+
+#line 11
+	' * Write
+	pusha 0
+	pushi 0
+	pushi 2
+	muli
+	addi
+	loadi
+	outi
+
+#line 11
+	' * Write
+	pushb 10
+	outb
+
+
+#line 12
+	' * Write
+	pusha 0
+	pushi 2
+	pushi 2
+	muli
+	addi
+	loadi
+	outi
+
+#line 12
+	' * Write
+	pushb 10
+	outb
+
+
+#line 15
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	pushi 2
+	storei
+
+
+#line 16
+	' * Assignment
+	pusha 0
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 2
+	muli
+	addi
+	pushi 99
+	storei
+
+
+#line 17
+	' * Write
+	pusha 0
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 2
+	muli
+	addi
+	loadi
+	outi
+
+#line 17
+	' * Write
+	pushb 10
+	outb
+
+
+#line 20
+	' * Assignment
+	push bp
+	pushi -3
+	addi
+	pushb 3
+	storeb
+
+
+#line 21
+	' * Assignment
+	pusha 0
+	push bp
+	pushi -3
+	addi
+	loadb
+	b2i
+	pushi 2
+	muli
+	addi
+	pushi 42
+	storei
+
+
+#line 22
+	' * Write
+	pusha 0
+	push bp
+	pushi -3
+	addi
+	loadb
+	b2i
+	pushi 2
+	muli
+	addi
+	loadi
+	outi
+
+#line 22
+	' * Write
+	pushb 10
+	outb
+
+
+#line 24
+	' * Assignment
+	pusha 20
+	push bp
+	pushi -3
+	addi
+	loadb
+	b2i
+	pushi 1
+	muli
+	addi
+	pushb 122
+	storeb
+
+
+#line 25
+	' * Write
+	pusha 20
+	push bp
+	pushi -3
+	addi
+	loadb
+	b2i
+	pushi 1
+	muli
+	addi
+	loadb
+	outb
+
+#line 25
+	' * Write
+	pushb 10
+	outb
+
+
+#line 27
+	' * Assignment
+	pusha 0
+	pushb 4
+	b2i
+	pushi 2
+	muli
+	addi
+	pushi 55
+	storei
+
+
+#line 28
+	' * Write
+	pusha 0
+	pushb 4
+	b2i
+	pushi 2
+	muli
+	addi
+	loadi
+	outi
+
+#line 28
+	' * Write
+	pushb 10
+	outb
+
+	ret 0, 3, 0

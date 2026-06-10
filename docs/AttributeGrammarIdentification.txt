@@ -1,0 +1,28 @@
+G:
+(1) VarDefinition: vardefinition -> ID type
+(2) FuncDefinition: funcdefinition -> ID type vardefinition* statement*
+(3) Variable: expression -> ID
+
+A: {expression.definition}
+
+R:
+(1) if(!symbolTable.insert(vardefinition)){
+         new ErrorType("Variable '" + vardefinition.getName() + "' is already defined in this scope", ast);
+    }
+
+(2) if(!symbolTable.insert(funcdefinition)){
+        new ErrorType("Function '" + funcdefinition.getName() + "' is already defined in this scope", ast);
+    }
+
+    symbolTable.set();
+    super_visit();
+    symbolTable.reset();
+
+(3) var def = symbolTable.find(expression.getName());
+    if(def == null){
+        expression.setDefinition(new VarDefinition(expression.getLine(), expression.getColumn(), expression.getName(), new ErrorType("Variable '" + expression.getName() + "' does not exist", expression)));
+    } else {
+        ast.setDefinition(def);
+    }
+
+

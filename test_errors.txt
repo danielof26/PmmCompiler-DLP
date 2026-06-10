@@ -1,0 +1,27 @@
+# Global
+a:int;
+b:double;
+a:char;                # Error 1 (redefinición global)
+
+def f(x:int, y:double) -> int: {
+    x:char;            # Error 2 (redefinición parámetro)
+
+    z:int;
+    z:int;             # Error 3 (redefinición local)
+
+    a:int;             # OK (shadowing permitido)
+
+    w = 5;             # Error 4 (w no existe)
+
+    return x;
+}
+
+def main() -> None: {
+    input a, b;        # OK (a y b globales)
+
+    input c;           # Error 5 (c no existe)
+
+    f();
+
+    h(3);              # Error 6 (h no existe)
+}

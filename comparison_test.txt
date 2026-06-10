@@ -1,0 +1,27 @@
+def main() -> None: {
+
+    a:int;
+    b:double;
+    c:char;
+
+    c = 'j';
+
+    a = -c;
+    a = !c;
+
+    if('a' > 'a' && 5 || 's'): {
+        print 'a';
+    }
+
+    if(2 > 2.2): {
+       print 'b';
+    }
+
+    if(96 > 'a'): {
+        print 'c';
+    }
+
+    if('a' > 2.2): {
+        print 'd';
+    }
+}

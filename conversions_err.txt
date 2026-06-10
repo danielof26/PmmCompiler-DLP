@@ -1,0 +1,38 @@
+i_var: int;
+c_var: char;
+r_var: double;
+arr_int: [5]int;
+
+# === RETURN: tipos no permitidos ===
+def ret_char_from_int() -> char: { return 5; }      # int -> char   FAIL
+def ret_char_from_double() -> char: { return 1.5; } # double -> char FAIL
+def ret_int_from_double() -> int: { return 1.5; }   # double -> int  FAIL
+
+def param_char(x: char) -> None: { print x, '\n'; }
+def param_int(x: int) -> None: { print x, '\n'; }
+
+def main()->None: {
+
+    # === ASIGNACION: tipos no permitidos ===
+    c_var = 5;           # int    -> char   FAIL
+    c_var = 1.5;         # double -> char   FAIL
+    i_var = 1.5;         # double -> int    FAIL
+
+    # === LOGICA CON DOUBLE ===
+    print 1.5 && 1, '\n'; # double && int  FAIL
+    print 1 && 1.5, '\n'; # int && double  FAIL
+    print !1.5, '\n';     # !double        FAIL
+
+    # === ACCESO A ARRAY CON DOUBLE ===
+    arr_int[1.0] = 5;     # double como indice FAIL
+    arr_int[r_var] = 5;   # double variable como indice FAIL
+
+    # === CONDICION WHILE/IF CON DOUBLE ===
+    while r_var: {        # double como condicion FAIL
+    }
+
+    # === PARAMETROS: tipos no compatibles ===
+    param_char(5);        # int    -> char  FAIL
+    param_char(1.5);      # double -> char  FAIL
+    param_int(1.5);       # double -> int   FAIL
+}

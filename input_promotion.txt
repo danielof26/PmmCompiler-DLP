@@ -1,0 +1,18 @@
+def main() -> None: {
+    c: char;
+    i: int;
+
+    c = 'a';
+
+    # UnaryMinus: -char debe convertirse a int antes del sub i
+    i = -c;
+
+    # UnaryNot: !char debe convertirse a int antes del not
+    i = !c;
+
+    # Logical: char && char, ambos deben convertirse a int
+    i = c && c;
+
+    # Logical: char || int
+    i = c || i;
+}

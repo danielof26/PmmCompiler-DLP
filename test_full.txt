@@ -1,0 +1,163 @@
+
+g_int: int;
+g_double: double;
+
+box: struct {
+    w: int;
+    h: int;
+};
+
+arr: [5]int;
+mat: [3][3]int;
+
+
+def p() -> None: {}
+
+def charAsInt(c: char) -> int: {
+    return c;
+}
+
+def notOf(c: char) -> int: {
+    return !c;
+}
+
+def negOf(c: char) -> int: {
+    return -c;
+}
+
+def scaleUp(n: int, f: double) -> double: {
+    return n * f;
+}
+
+def toInt(d: double) -> int: {
+    return (int)d;
+}
+
+def myAbs(n: int) -> int: {
+    if n < 0:
+        return -n;
+    else:
+        return n;
+}
+
+def fillArr() -> None: {
+    i: int;
+    i = 0;
+    while i < 5: {
+        arr[i] = (i + 1) * (i + 1);
+        i = i + 1;
+    }
+}
+
+def fillMat() -> None: {
+    i, j: int;
+    i = 0;
+    while i < 3: {
+        j = 0;
+        while j < 3: {
+            mat[i][j] = i * 3 + j + 1;
+            j = j + 1;
+        }
+        i = i + 1;
+    }
+}
+
+def sumArr() -> int: {
+    i, s: int;
+    i = 0;
+    s = 0;
+    while i < 5: {
+        s = s + arr[i];
+        i = i + 1;
+    }
+    return s;
+}
+
+def main() -> None: {
+    i, j, r: int;
+    c: char;
+    d: double;
+
+    p();
+
+    # char->int implicit promotion en return
+    print charAsInt('A'), '\n';
+    print charAsInt('0'), '\n';
+
+    # UnaryNot sobre char: !char -> b2i -> not
+    print notOf('A'), '\n';
+    print notOf(' '), '\n';
+
+    # UnaryMinus sobre char: -char -> b2i -> sub
+    print negOf('A'), '\n';
+
+    # int * double -> double, luego cast a int
+    print toInt(scaleUp(4, 2.5)), '\n';
+    print toInt(3.7), '\n';
+
+    # if/else con return en ambas ramas
+    print myAbs(9), '\n';
+    print myAbs(-9), '\n';
+
+    # acceso a struct
+    box.w = 6;
+    box.h = 7;
+    print box.w, ' ', box.h, ' ', box.w * box.h, '\n';
+
+    # array 1D
+    fillArr();
+    i = 0;
+    while i < 5: {
+        print arr[i], ' ';
+        i = i + 1;
+    }
+    print '\n';
+    print sumArr(), '\n';
+
+    # array 2D
+    fillMat();
+    i = 0;
+    while i < 3: {
+        j = 0;
+        while j < 3: {
+            print mat[i][j], ' ';
+            j = j + 1;
+        }
+        print '\n';
+        i = i + 1;
+    }
+
+    # variables globales
+    #g_int = 15;
+    g_double = g_int * 2.0;
+    print g_int, '\n';
+    print toInt(g_double), '\n';
+
+    # cadena de casts
+    c = (char)65;
+    i = (int)c;
+    print c, '\n';
+    print i, '\n';
+
+    # operadores logicos con valores 0/1 (from comparisons)
+    i = 5;
+    r = i > 10;
+    print r, '\n';
+    r = !r;
+    print r, '\n';
+    j = i > 0;
+    r = r && j;
+    print r, '\n';
+    j = i > 10;
+    r = r || j;
+    print r, '\n';
+
+    # if/else con ==
+    i = 42;
+    if i == 42: {
+        print 1, '\n';
+    }
+    else: {
+        print 0, '\n';
+    }
+}

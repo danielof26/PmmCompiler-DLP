@@ -1,0 +1,2840 @@
+
+#source "massive_test.txt"
+
+	' * int g_int (offset 0)
+	' * real g_double (offset 2)
+	' * char g_char (offset 6)
+	' * struct{ int int } point (offset 7)
+	' * array[struct{ int int }] points (offset 11)
+	' * struct{ array[int] int } bag (offset 27)
+	' * struct{ int real char } container (offset 35)
+	' * array[int] arr1 (offset 42)
+	' * array[array[int]] arr2 (offset 52)
+
+	' * Invocation to main function
+	call main
+halt
+
+
+#line 45
+
+noop:
+	' * Parameters
+	' * Local variables
+	enter 0
+	ret 0, 0, 0
+
+#line 47
+
+myAdd:
+	' * Parameters
+	' * int a (offset 6)
+	' * int b (offset 4)
+	' * Local variables
+	enter 0
+#line 48
+	' * Return
+	push bp
+	pushi 6
+	addi
+	loadi
+	push bp
+	pushi 4
+	addi
+	loadi
+	addi
+	ret 2, 0, 4
+
+
+#line 51
+
+double_it:
+	' * Parameters
+	' * int n (offset 4)
+	' * Local variables
+	enter 0
+#line 52
+	' * Return
+	push bp
+	pushi 4
+	addi
+	loadi
+	push bp
+	pushi 4
+	addi
+	loadi
+	call myAdd
+	ret 2, 0, 2
+
+
+#line 55
+
+quad:
+	' * Parameters
+	' * int n (offset 4)
+	' * Local variables
+	enter 0
+#line 56
+	' * Return
+	push bp
+	pushi 4
+	addi
+	loadi
+	call double_it
+	call double_it
+	ret 2, 0, 2
+
+
+#line 59
+
+myMod:
+	' * Parameters
+	' * int a (offset 6)
+	' * int b (offset 4)
+	' * Local variables
+	enter 0
+#line 60
+	' * Return
+	push bp
+	pushi 6
+	addi
+	loadi
+	push bp
+	pushi 4
+	addi
+	loadi
+	modi
+	ret 2, 0, 4
+
+
+#line 64
+
+arithTest:
+	' * Parameters
+	' * int a (offset 6)
+	' * int b (offset 4)
+	' * Local variables
+	' * int r (offset -2)
+	enter 2
+
+#line 66
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	push bp
+	pushi 6
+	addi
+	loadi
+	push bp
+	pushi 4
+	addi
+	loadi
+	addi
+	storei
+
+
+#line 66
+	' * Write
+	push bp
+	pushi -2
+	addi
+	loadi
+	outi
+
+#line 66
+	' * Write
+	pushb 32
+	outb
+
+
+#line 67
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	push bp
+	pushi 6
+	addi
+	loadi
+	push bp
+	pushi 4
+	addi
+	loadi
+	subi
+	storei
+
+
+#line 67
+	' * Write
+	push bp
+	pushi -2
+	addi
+	loadi
+	outi
+
+#line 67
+	' * Write
+	pushb 32
+	outb
+
+
+#line 68
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	push bp
+	pushi 6
+	addi
+	loadi
+	push bp
+	pushi 4
+	addi
+	loadi
+	muli
+	storei
+
+
+#line 68
+	' * Write
+	push bp
+	pushi -2
+	addi
+	loadi
+	outi
+
+#line 68
+	' * Write
+	pushb 32
+	outb
+
+
+#line 69
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	push bp
+	pushi 6
+	addi
+	loadi
+	push bp
+	pushi 4
+	addi
+	loadi
+	divi
+	storei
+
+
+#line 69
+	' * Write
+	push bp
+	pushi -2
+	addi
+	loadi
+	outi
+
+#line 69
+	' * Write
+	pushb 32
+	outb
+
+
+#line 70
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	push bp
+	pushi 6
+	addi
+	loadi
+	push bp
+	pushi 4
+	addi
+	loadi
+	modi
+	storei
+
+
+#line 70
+	' * Write
+	push bp
+	pushi -2
+	addi
+	loadi
+	outi
+
+#line 70
+	' * Write
+	pushb 10
+	outb
+
+	ret 0, 2, 4
+
+#line 74
+
+cmpTest:
+	' * Parameters
+	' * int a (offset 6)
+	' * int b (offset 4)
+	' * Local variables
+	enter 0
+
+#line 75
+	' * Write
+	push bp
+	pushi 6
+	addi
+	loadi
+	push bp
+	pushi 4
+	addi
+	loadi
+	lti
+	outi
+
+#line 75
+	' * Write
+	pushb 32
+	outb
+
+
+#line 76
+	' * Write
+	push bp
+	pushi 6
+	addi
+	loadi
+	push bp
+	pushi 4
+	addi
+	loadi
+	gti
+	outi
+
+#line 76
+	' * Write
+	pushb 32
+	outb
+
+
+#line 77
+	' * Write
+	push bp
+	pushi 6
+	addi
+	loadi
+	push bp
+	pushi 4
+	addi
+	loadi
+	lei
+	outi
+
+#line 77
+	' * Write
+	pushb 32
+	outb
+
+
+#line 78
+	' * Write
+	push bp
+	pushi 6
+	addi
+	loadi
+	push bp
+	pushi 4
+	addi
+	loadi
+	gei
+	outi
+
+#line 78
+	' * Write
+	pushb 32
+	outb
+
+
+#line 79
+	' * Write
+	push bp
+	pushi 6
+	addi
+	loadi
+	push bp
+	pushi 4
+	addi
+	loadi
+	eqi
+	outi
+
+#line 79
+	' * Write
+	pushb 32
+	outb
+
+
+#line 80
+	' * Write
+	push bp
+	pushi 6
+	addi
+	loadi
+	push bp
+	pushi 4
+	addi
+	loadi
+	nei
+	outi
+
+#line 80
+	' * Write
+	pushb 10
+	outb
+
+	ret 0, 0, 4
+
+#line 84
+
+logicTest:
+	' * Parameters
+	' * int a (offset 6)
+	' * int b (offset 4)
+	' * Local variables
+	enter 0
+
+#line 85
+	' * Write
+	push bp
+	pushi 6
+	addi
+	loadi
+	push bp
+	pushi 4
+	addi
+	loadi
+	and
+	outi
+
+#line 85
+	' * Write
+	pushb 32
+	outb
+
+
+#line 86
+	' * Write
+	push bp
+	pushi 6
+	addi
+	loadi
+	push bp
+	pushi 4
+	addi
+	loadi
+	or
+	outi
+
+#line 86
+	' * Write
+	pushb 32
+	outb
+
+
+#line 87
+	' * Write
+	push bp
+	pushi 6
+	addi
+	loadi
+	not
+	outi
+
+#line 87
+	' * Write
+	pushb 32
+	outb
+
+
+#line 88
+	' * Write
+	push bp
+	pushi 4
+	addi
+	loadi
+	not
+	outi
+
+#line 88
+	' * Write
+	pushb 10
+	outb
+
+	ret 0, 0, 4
+
+#line 92
+
+mixedArith:
+	' * Parameters
+	' * Local variables
+	' * int i (offset -2)
+	' * real d (offset -6)
+	' * char c (offset -7)
+	enter 7
+
+#line 96
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	pushi 10
+	storei
+
+
+#line 97
+	' * Assignment
+	push bp
+	pushi -6
+	addi
+	pushf 2.5
+	storef
+
+
+#line 98
+	' * Assignment
+	push bp
+	pushi -7
+	addi
+	pushb 65
+	storeb
+
+
+#line 99
+	' * Write
+	push bp
+	pushi -2
+	addi
+	loadi
+	i2f
+	push bp
+	pushi -6
+	addi
+	loadf
+	mulf
+	f2i
+	outi
+
+#line 99
+	' * Write
+	pushb 32
+	outb
+
+
+#line 100
+	' * Write
+	push bp
+	pushi -7
+	addi
+	loadb
+	b2i
+	push bp
+	pushi -2
+	addi
+	loadi
+	addi
+	outi
+
+#line 100
+	' * Write
+	pushb 32
+	outb
+
+
+#line 101
+	' * Write
+	push bp
+	pushi -7
+	addi
+	loadb
+	b2i
+	pushb 97
+	b2i
+	subi
+	outi
+
+#line 101
+	' * Write
+	pushb 10
+	outb
+
+	ret 0, 7, 0
+
+#line 105
+
+castTest:
+	' * Parameters
+	' * Local variables
+	' * int i (offset -2)
+	' * real d (offset -6)
+	' * char c (offset -7)
+	enter 7
+
+#line 109
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	pushi 65
+	storei
+
+
+#line 110
+	' * Assignment
+	push bp
+	pushi -7
+	addi
+	push bp
+	pushi -2
+	addi
+	loadi
+	i2b
+	storeb
+
+
+#line 110
+	' * Write
+	push bp
+	pushi -7
+	addi
+	loadb
+	outb
+
+#line 110
+	' * Write
+	pushb 32
+	outb
+
+
+#line 111
+	' * Assignment
+	push bp
+	pushi -6
+	addi
+	push bp
+	pushi -2
+	addi
+	loadi
+	i2f
+	storef
+
+
+#line 112
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	push bp
+	pushi -6
+	addi
+	loadf
+	f2i
+	storei
+
+
+#line 112
+	' * Write
+	push bp
+	pushi -2
+	addi
+	loadi
+	outi
+
+#line 112
+	' * Write
+	pushb 32
+	outb
+
+
+#line 113
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	pushf 3.9
+	f2i
+	storei
+
+
+#line 113
+	' * Write
+	push bp
+	pushi -2
+	addi
+	loadi
+	outi
+
+#line 113
+	' * Write
+	pushb 32
+	outb
+
+
+#line 114
+	' * Assignment
+	push bp
+	pushi -7
+	addi
+	pushi 48
+	i2b
+	storeb
+
+
+#line 114
+	' * Write
+	push bp
+	pushi -7
+	addi
+	loadb
+	outb
+
+#line 114
+	' * Write
+	pushb 10
+	outb
+
+	ret 0, 7, 0
+
+#line 118
+
+scaleD:
+	' * Parameters
+	' * real x (offset 8)
+	' * real f (offset 4)
+	' * Local variables
+	enter 0
+#line 119
+	' * Return
+	push bp
+	pushi 8
+	addi
+	loadf
+	push bp
+	pushi 4
+	addi
+	loadf
+	mulf
+	ret 4, 0, 8
+
+
+#line 123
+
+cmpDouble:
+	' * Parameters
+	' * real a (offset 8)
+	' * real b (offset 4)
+	' * Local variables
+	enter 0
+
+#line 124
+	' * Write
+	push bp
+	pushi 8
+	addi
+	loadf
+	push bp
+	pushi 4
+	addi
+	loadf
+	ltf
+	outi
+
+#line 124
+	' * Write
+	pushb 32
+	outb
+
+
+#line 125
+	' * Write
+	push bp
+	pushi 8
+	addi
+	loadf
+	push bp
+	pushi 4
+	addi
+	loadf
+	gtf
+	outi
+
+#line 125
+	' * Write
+	pushb 32
+	outb
+
+
+#line 126
+	' * Write
+	push bp
+	pushi 8
+	addi
+	loadf
+	push bp
+	pushi 4
+	addi
+	loadf
+	lef
+	outi
+
+#line 126
+	' * Write
+	pushb 32
+	outb
+
+
+#line 127
+	' * Write
+	push bp
+	pushi 8
+	addi
+	loadf
+	push bp
+	pushi 4
+	addi
+	loadf
+	gef
+	outi
+
+#line 127
+	' * Write
+	pushb 10
+	outb
+
+	ret 0, 0, 8
+
+#line 131
+
+charOps:
+	' * Parameters
+	' * char c (offset 4)
+	' * Local variables
+	enter 0
+
+#line 132
+	' * Write
+	push bp
+	pushi 4
+	addi
+	loadb
+	b2i
+	pushi 0
+	addi
+	outi
+
+#line 132
+	' * Write
+	pushb 32
+	outb
+
+
+#line 133
+	' * Write
+	push bp
+	pushi 4
+	addi
+	loadb
+	b2i
+	not
+	outi
+
+#line 133
+	' * Write
+	pushb 32
+	outb
+
+
+#line 134
+	' * Write
+	pushi 0
+	push bp
+	pushi 4
+	addi
+	loadb
+	b2i
+	subi
+	outi
+
+#line 134
+	' * Write
+	pushb 10
+	outb
+
+	ret 0, 0, 1
+
+#line 138
+
+charAsInt:
+	' * Parameters
+	' * char c (offset 4)
+	' * Local variables
+	enter 0
+#line 139
+	' * Return
+	push bp
+	pushi 4
+	addi
+	loadb
+	b2i
+	ret 2, 0, 1
+
+
+#line 143
+
+andOf:
+	' * Parameters
+	' * char a (offset 5)
+	' * char b (offset 4)
+	' * Local variables
+	enter 0
+#line 144
+	' * Return
+	push bp
+	pushi 5
+	addi
+	loadb
+	b2i
+	push bp
+	pushi 4
+	addi
+	loadb
+	b2i
+	and
+	ret 2, 0, 2
+
+
+#line 148
+
+orOf:
+	' * Parameters
+	' * char a (offset 5)
+	' * char b (offset 4)
+	' * Local variables
+	enter 0
+#line 149
+	' * Return
+	push bp
+	pushi 5
+	addi
+	loadb
+	b2i
+	push bp
+	pushi 4
+	addi
+	loadb
+	b2i
+	or
+	ret 2, 0, 2
+
+
+#line 153
+
+fibonacci:
+	' * Parameters
+	' * int n (offset 4)
+	' * Local variables
+	' * int a (offset -2)
+	' * int b (offset -4)
+	' * int temp (offset -6)
+	' * int i (offset -8)
+	enter 8
+
+#line 155
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	pushi 0
+	storei
+
+
+#line 156
+	' * Assignment
+	push bp
+	pushi -4
+	addi
+	pushi 1
+	storei
+
+
+#line 157
+	' * Assignment
+	push bp
+	pushi -8
+	addi
+	pushi 0
+	storei
+
+#line 158
+	' * While
+
+#line 158
+label_0:
+	push bp
+	pushi -8
+	addi
+	loadi
+	push bp
+	pushi 4
+	addi
+	loadi
+	lti
+	jz label_1
+	' * While body
+
+#line 159
+	' * Assignment
+	push bp
+	pushi -6
+	addi
+	push bp
+	pushi -2
+	addi
+	loadi
+	push bp
+	pushi -4
+	addi
+	loadi
+	addi
+	storei
+
+#line 160
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	push bp
+	pushi -4
+	addi
+	loadi
+	storei
+
+#line 161
+	' * Assignment
+	push bp
+	pushi -4
+	addi
+	push bp
+	pushi -6
+	addi
+	loadi
+	storei
+
+#line 162
+	' * Assignment
+	push bp
+	pushi -8
+	addi
+	push bp
+	pushi -8
+	addi
+	loadi
+	pushi 1
+	addi
+	storei
+	jmp label_0
+label_1:
+
+#line 164
+	' * Return
+	push bp
+	pushi -2
+	addi
+	loadi
+	ret 2, 8, 2
+
+
+#line 168
+
+max:
+	' * Parameters
+	' * int a (offset 6)
+	' * int b (offset 4)
+	' * Local variables
+	enter 0
+#line 169
+	' * If
+
+#line 169
+	push bp
+	pushi 6
+	addi
+	loadi
+	push bp
+	pushi 4
+	addi
+	loadi
+	gti
+	jz label_2
+	' * if body
+
+#line 170
+	' * Return
+	push bp
+	pushi 6
+	addi
+	loadi
+	ret 2, 0, 4
+	jmp label_3
+label_2:
+	' * else body
+
+#line 172
+	' * Return
+	push bp
+	pushi 4
+	addi
+	loadi
+	ret 2, 0, 4
+label_3:
+
+
+#line 176
+
+clamp:
+	' * Parameters
+	' * int val (offset 8)
+	' * int lo (offset 6)
+	' * int hi (offset 4)
+	' * Local variables
+	enter 0
+#line 177
+	' * If
+
+#line 177
+	push bp
+	pushi 8
+	addi
+	loadi
+	push bp
+	pushi 6
+	addi
+	loadi
+	lti
+	jz label_4
+	' * if body
+
+#line 178
+	' * Return
+	push bp
+	pushi 6
+	addi
+	loadi
+	ret 2, 0, 6
+	jmp label_5
+label_4:
+	' * else body
+
+#line 181
+	' * If
+
+#line 181
+	push bp
+	pushi 8
+	addi
+	loadi
+	push bp
+	pushi 4
+	addi
+	loadi
+	gti
+	jz label_6
+	' * if body
+
+#line 182
+	' * Return
+	push bp
+	pushi 4
+	addi
+	loadi
+	ret 2, 0, 6
+	jmp label_7
+label_6:
+	' * else body
+
+#line 185
+	' * Return
+	push bp
+	pushi 8
+	addi
+	loadi
+	ret 2, 0, 6
+label_7:
+label_5:
+
+
+#line 191
+
+fillArr1:
+	' * Parameters
+	' * Local variables
+	' * int i (offset -2)
+	enter 2
+
+#line 193
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	pushi 0
+	storei
+
+#line 194
+	' * While
+
+#line 194
+label_8:
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 5
+	lti
+	jz label_9
+	' * While body
+
+#line 195
+	' * Assignment
+	pusha 42
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 2
+	muli
+	addi
+	push bp
+	pushi -2
+	addi
+	loadi
+	push bp
+	pushi -2
+	addi
+	loadi
+	muli
+	storei
+
+#line 196
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 1
+	addi
+	storei
+	jmp label_8
+label_9:
+
+	ret 0, 2, 0
+
+#line 201
+
+fillArr2:
+	' * Parameters
+	' * Local variables
+	' * int i (offset -2)
+	' * int j (offset -4)
+	enter 4
+
+#line 203
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	pushi 0
+	storei
+
+#line 204
+	' * While
+
+#line 204
+label_10:
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 3
+	lti
+	jz label_11
+	' * While body
+
+#line 205
+	' * Assignment
+	push bp
+	pushi -4
+	addi
+	pushi 0
+	storei
+#line 206
+	' * While
+
+#line 206
+label_12:
+	push bp
+	pushi -4
+	addi
+	loadi
+	pushi 4
+	lti
+	jz label_13
+	' * While body
+
+#line 207
+	' * Assignment
+	pusha 52
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 8
+	muli
+	addi
+	push bp
+	pushi -4
+	addi
+	loadi
+	pushi 2
+	muli
+	addi
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 4
+	muli
+	push bp
+	pushi -4
+	addi
+	loadi
+	addi
+	storei
+
+#line 208
+	' * Assignment
+	push bp
+	pushi -4
+	addi
+	push bp
+	pushi -4
+	addi
+	loadi
+	pushi 1
+	addi
+	storei
+	jmp label_12
+label_13:
+
+#line 210
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 1
+	addi
+	storei
+	jmp label_10
+label_11:
+
+	ret 0, 4, 0
+
+#line 215
+
+fillPoints:
+	' * Parameters
+	' * Local variables
+	' * int i (offset -2)
+	enter 2
+
+#line 217
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	pushi 0
+	storei
+
+#line 218
+	' * While
+
+#line 218
+label_14:
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 4
+	lti
+	jz label_15
+	' * While body
+
+#line 219
+	' * Assignment
+	pusha 11
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 4
+	muli
+	addi
+	pushi 0
+	addi
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 2
+	muli
+	storei
+
+#line 220
+	' * Assignment
+	pusha 11
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 4
+	muli
+	addi
+	pushi 2
+	addi
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 2
+	muli
+	pushi 1
+	addi
+	storei
+
+#line 221
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 1
+	addi
+	storei
+	jmp label_14
+label_15:
+
+	ret 0, 2, 0
+
+#line 226
+
+fillBag:
+	' * Parameters
+	' * Local variables
+	enter 0
+
+#line 227
+	' * Assignment
+	pusha 27
+	pushi 0
+	addi
+	pushi 0
+	pushi 2
+	muli
+	addi
+	pushi 10
+	storei
+
+
+#line 228
+	' * Assignment
+	pusha 27
+	pushi 0
+	addi
+	pushi 1
+	pushi 2
+	muli
+	addi
+	pushi 20
+	storei
+
+
+#line 229
+	' * Assignment
+	pusha 27
+	pushi 0
+	addi
+	pushi 2
+	pushi 2
+	muli
+	addi
+	pushi 30
+	storei
+
+
+#line 230
+	' * Assignment
+	pusha 27
+	pushi 6
+	addi
+	pushi 3
+	storei
+
+	ret 0, 0, 0
+
+#line 237
+
+promoArgs:
+	' * Parameters
+	' * Local variables
+	' * real d (offset -4)
+	enter 4
+
+#line 239
+	' * Write
+	pushb 65
+	b2i
+	pushi 1
+	call myAdd
+	outi
+
+#line 239
+	' * Write
+	pushb 10
+	outb
+
+
+#line 240
+	' * Write
+	pushi 3
+	i2f
+	pushi 2
+	i2f
+	call scaleD
+	f2i
+	outi
+
+#line 240
+	' * Write
+	pushb 10
+	outb
+
+
+#line 241
+	' * Assignment
+	push bp
+	pushi -4
+	addi
+	pushb 65
+	b2i
+	i2f
+	storef
+
+
+#line 242
+	' * Write
+	push bp
+	pushi -4
+	addi
+	loadf
+	f2i
+	outi
+
+#line 242
+	' * Write
+	pushb 10
+	outb
+
+	ret 0, 4, 0
+
+#line 248
+
+mixedCmp:
+	' * Parameters
+	' * Local variables
+	enter 0
+
+#line 249
+	' * Write
+	pushi 3
+	i2f
+	pushf 3.5
+	ltf
+	outi
+
+#line 249
+	' * Write
+	pushb 32
+	outb
+
+
+#line 250
+	' * Write
+	pushi 4
+	i2f
+	pushf 3.5
+	gtf
+	outi
+
+#line 250
+	' * Write
+	pushb 32
+	outb
+
+
+#line 251
+	' * Write
+	pushb 65
+	b2i
+	pushi 100
+	lti
+	outi
+
+#line 251
+	' * Write
+	pushb 32
+	outb
+
+
+#line 252
+	' * Write
+	pushb 122
+	b2i
+	pushi 100
+	gti
+	outi
+
+#line 252
+	' * Write
+	pushb 10
+	outb
+
+	ret 0, 0, 0
+
+#line 256
+
+testInput:
+	' * Parameters
+	' * Local variables
+	' * int i (offset -2)
+	' * char c (offset -3)
+	enter 3
+
+#line 259
+	' * Read
+	push bp
+	pushi -2
+	addi
+	ini
+	storei
+
+
+#line 260
+	' * Read
+	push bp
+	pushi -3
+	addi
+	inb
+	storeb
+
+
+#line 261
+	' * Write
+	push bp
+	pushi -2
+	addi
+	loadi
+	outi
+
+#line 261
+	' * Write
+	pushb 32
+	outb
+
+#line 261
+	' * Write
+	push bp
+	pushi -3
+	addi
+	loadb
+	outb
+
+#line 261
+	' * Write
+	pushb 10
+	outb
+
+	ret 0, 3, 0
+
+#line 268
+
+main:
+	' * Parameters
+	' * Local variables
+	' * int i (offset -2)
+	' * int j (offset -4)
+	' * int r (offset -6)
+	' * real d (offset -10)
+	' * char c (offset -11)
+	enter 11
+
+#line 273
+	call noop
+
+
+#line 276
+	pushi 17
+	pushi 5
+	call arithTest
+
+
+#line 279
+	pushi 3
+	pushi 5
+	call cmpTest
+
+
+#line 282
+	' * Write
+	pushi 3
+	call quad
+	outi
+
+#line 282
+	' * Write
+	pushb 10
+	outb
+
+
+#line 285
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	pushi 0
+	storei
+
+#line 286
+	' * While
+
+#line 286
+label_16:
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 8
+	lti
+	jz label_17
+	' * While body
+
+#line 287
+	' * Write
+	push bp
+	pushi -2
+	addi
+	loadi
+	call fibonacci
+	outi
+
+#line 287
+	' * Write
+	pushb 32
+	outb
+
+#line 288
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 1
+	addi
+	storei
+	jmp label_16
+label_17:
+
+
+#line 290
+	' * Write
+	pushb 10
+	outb
+
+
+#line 293
+	' * Write
+	pushi 7
+	pushi 3
+	call max
+	outi
+
+#line 293
+	' * Write
+	pushb 32
+	outb
+
+
+#line 294
+	' * Write
+	pushi 0
+	pushi 1
+	subi
+	pushi 0
+	pushi 5
+	subi
+	call max
+	outi
+
+#line 294
+	' * Write
+	pushb 32
+	outb
+
+
+#line 295
+	' * Write
+	pushi 5
+	pushi 0
+	pushi 10
+	call clamp
+	outi
+
+#line 295
+	' * Write
+	pushb 32
+	outb
+
+
+#line 296
+	' * Write
+	pushi 0
+	pushi 3
+	subi
+	pushi 0
+	pushi 10
+	call clamp
+	outi
+
+#line 296
+	' * Write
+	pushb 32
+	outb
+
+
+#line 297
+	' * Write
+	pushi 15
+	pushi 0
+	pushi 10
+	call clamp
+	outi
+
+#line 297
+	' * Write
+	pushb 10
+	outb
+
+
+#line 300
+	call fillArr1
+
+
+#line 301
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	pushi 0
+	storei
+
+#line 302
+	' * While
+
+#line 302
+label_18:
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 5
+	lti
+	jz label_19
+	' * While body
+
+#line 303
+	' * Write
+	pusha 42
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 2
+	muli
+	addi
+	loadi
+	outi
+
+#line 303
+	' * Write
+	pushb 32
+	outb
+
+#line 304
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 1
+	addi
+	storei
+	jmp label_18
+label_19:
+
+
+#line 306
+	' * Write
+	pushb 10
+	outb
+
+
+#line 309
+	call fillArr2
+
+
+#line 310
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	pushi 0
+	storei
+
+#line 311
+	' * While
+
+#line 311
+label_20:
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 3
+	lti
+	jz label_21
+	' * While body
+
+#line 312
+	' * Assignment
+	push bp
+	pushi -4
+	addi
+	pushi 0
+	storei
+#line 313
+	' * While
+
+#line 313
+label_22:
+	push bp
+	pushi -4
+	addi
+	loadi
+	pushi 4
+	lti
+	jz label_23
+	' * While body
+
+#line 314
+	' * Write
+	pusha 52
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 8
+	muli
+	addi
+	push bp
+	pushi -4
+	addi
+	loadi
+	pushi 2
+	muli
+	addi
+	loadi
+	outi
+
+#line 314
+	' * Write
+	pushb 32
+	outb
+
+#line 315
+	' * Assignment
+	push bp
+	pushi -4
+	addi
+	push bp
+	pushi -4
+	addi
+	loadi
+	pushi 1
+	addi
+	storei
+	jmp label_22
+label_23:
+
+#line 317
+	' * Write
+	pushb 10
+	outb
+
+#line 318
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 1
+	addi
+	storei
+	jmp label_20
+label_21:
+
+
+#line 322
+	call fillPoints
+
+
+#line 323
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	pushi 0
+	storei
+
+#line 324
+	' * While
+
+#line 324
+label_24:
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 4
+	lti
+	jz label_25
+	' * While body
+
+#line 325
+	' * Write
+	pusha 11
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 4
+	muli
+	addi
+	pushi 0
+	addi
+	loadi
+	outi
+
+#line 325
+	' * Write
+	pushb 32
+	outb
+
+#line 325
+	' * Write
+	pusha 11
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 4
+	muli
+	addi
+	pushi 2
+	addi
+	loadi
+	outi
+
+#line 325
+	' * Write
+	pushb 10
+	outb
+
+#line 326
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 1
+	addi
+	storei
+	jmp label_24
+label_25:
+
+
+#line 330
+	call fillBag
+
+
+#line 331
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	pushi 0
+	storei
+
+#line 332
+	' * While
+
+#line 332
+label_26:
+	push bp
+	pushi -2
+	addi
+	loadi
+	pusha 27
+	pushi 6
+	addi
+	loadi
+	lti
+	jz label_27
+	' * While body
+
+#line 333
+	' * Write
+	pusha 27
+	pushi 0
+	addi
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 2
+	muli
+	addi
+	loadi
+	outi
+
+#line 333
+	' * Write
+	pushb 32
+	outb
+
+#line 334
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 1
+	addi
+	storei
+	jmp label_26
+label_27:
+
+
+#line 336
+	' * Write
+	pushb 10
+	outb
+
+
+#line 339
+	' * Assignment
+	pusha 7
+	pushi 0
+	addi
+	pushi 100
+	storei
+
+
+#line 340
+	' * Assignment
+	pusha 7
+	pushi 2
+	addi
+	pushi 200
+	storei
+
+
+#line 341
+	' * Write
+	pusha 7
+	pushi 0
+	addi
+	loadi
+	outi
+
+#line 341
+	' * Write
+	pushb 32
+	outb
+
+#line 341
+	' * Write
+	pusha 7
+	pushi 2
+	addi
+	loadi
+	outi
+
+#line 341
+	' * Write
+	pushb 10
+	outb
+
+
+#line 344
+	' * Assignment
+	pusha 0
+	pushi 42
+	storei
+
+
+#line 345
+	' * Assignment
+	pusha 6
+	pushb 90
+	storeb
+
+
+#line 346
+	' * Write
+	pusha 0
+	loadi
+	outi
+
+#line 346
+	' * Write
+	pushb 32
+	outb
+
+#line 346
+	' * Write
+	pusha 6
+	loadb
+	outb
+
+#line 346
+	' * Write
+	pushb 10
+	outb
+
+
+#line 349
+	' * Assignment
+	pusha 35
+	pushi 0
+	addi
+	pushi 7
+	storei
+
+
+#line 350
+	' * Assignment
+	pusha 35
+	pushi 2
+	addi
+	pushf 2.5
+	storef
+
+
+#line 351
+	' * Assignment
+	pusha 35
+	pushi 6
+	addi
+	pushb 88
+	storeb
+
+
+#line 352
+	' * Write
+	pusha 35
+	pushi 0
+	addi
+	loadi
+	outi
+
+#line 352
+	' * Write
+	pushb 32
+	outb
+
+#line 352
+	' * Write
+	pusha 35
+	pushi 6
+	addi
+	loadb
+	outb
+
+#line 352
+	' * Write
+	pushb 10
+	outb
+
+
+#line 355
+	call castTest
+
+
+#line 358
+	call mixedArith
+
+
+#line 361
+	pushi 1
+	pushi 0
+	call logicTest
+
+
+#line 364
+	' * Write
+	pushf 3.0
+	pushf 4.0
+	call scaleD
+	f2i
+	outi
+
+#line 364
+	' * Write
+	pushb 10
+	outb
+
+
+#line 365
+	' * Write
+	pushf 2.5
+	pushf 2.0
+	call scaleD
+	f2i
+	outi
+
+#line 365
+	' * Write
+	pushb 10
+	outb
+
+
+#line 368
+	' * Assignment
+	pusha 2
+	pushf 3.14
+	storef
+
+
+#line 369
+	pushf 3.14
+	pushf 3.0
+	call cmpDouble
+
+
+#line 372
+	pushb 97
+	call charOps
+
+
+#line 375
+	' * Write
+	pushb 65
+	call charAsInt
+	outi
+
+#line 375
+	' * Write
+	pushb 10
+	outb
+
+
+#line 378
+	' * Write
+	pushb 65
+	pushb 66
+	call andOf
+	outi
+
+#line 378
+	' * Write
+	pushb 10
+	outb
+
+
+#line 381
+	' * Write
+	pushi 17
+	pushi 5
+	call myMod
+	outi
+
+#line 381
+	' * Write
+	pushb 10
+	outb
+
+
+#line 384
+	pushi 5
+	pushi 3
+	call myAdd
+	popi
+
+
+#line 387
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	pushi 99
+	storei
+
+
+#line 388
+	' * Assignment
+	push bp
+	pushi -10
+	addi
+	pushf 1.5
+	storef
+
+
+#line 389
+	' * Assignment
+	push bp
+	pushi -11
+	addi
+	pushb 81
+	storeb
+
+
+#line 390
+	' * Write
+	push bp
+	pushi -2
+	addi
+	loadi
+	outi
+
+#line 390
+	' * Write
+	pushb 32
+	outb
+
+#line 390
+	' * Write
+	push bp
+	pushi -11
+	addi
+	loadb
+	outb
+
+#line 390
+	' * Write
+	pushb 10
+	outb
+
+
+#line 391
+	' * Write
+	push bp
+	pushi -10
+	addi
+	loadf
+	f2i
+	outi
+
+#line 391
+	' * Write
+	pushb 10
+	outb
+
+
+#line 394
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	pushi 42
+	storei
+
+#line 395
+	' * If
+
+#line 395
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 100
+	gti
+	jz label_28
+	' * if body
+
+
+#line 396
+	' * Write
+	pushi 3
+	outi
+
+#line 396
+	' * Write
+	pushb 10
+	outb
+	jmp label_29
+label_28:
+	' * else body
+
+#line 399
+	' * If
+
+#line 399
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 50
+	gti
+	jz label_30
+	' * if body
+
+
+#line 400
+	' * Write
+	pushi 2
+	outi
+
+#line 400
+	' * Write
+	pushb 10
+	outb
+	jmp label_31
+label_30:
+	' * else body
+
+#line 403
+	' * If
+
+#line 403
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 0
+	gti
+	jz label_32
+	' * if body
+
+
+#line 404
+	' * Write
+	pushi 1
+	outi
+
+#line 404
+	' * Write
+	pushb 10
+	outb
+	jmp label_33
+label_32:
+	' * else body
+
+
+#line 407
+	' * Write
+	pushi 0
+	outi
+
+#line 407
+	' * Write
+	pushb 10
+	outb
+label_33:
+label_31:
+label_29:
+
+
+#line 413
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	pushi 1
+	storei
+
+
+#line 414
+	' * Assignment
+	push bp
+	pushi -6
+	addi
+	pushi 0
+	storei
+
+#line 415
+	' * While
+
+#line 415
+label_34:
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 6
+	lti
+	jz label_35
+	' * While body
+
+#line 416
+	' * Assignment
+	push bp
+	pushi -6
+	addi
+	push bp
+	pushi -6
+	addi
+	loadi
+	push bp
+	pushi -2
+	addi
+	loadi
+	addi
+	storei
+
+#line 417
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	push bp
+	pushi -2
+	addi
+	loadi
+	pushi 1
+	addi
+	storei
+	jmp label_34
+label_35:
+
+
+#line 419
+	' * Write
+	push bp
+	pushi -6
+	addi
+	loadi
+	outi
+
+#line 419
+	' * Write
+	pushb 10
+	outb
+
+
+#line 422
+	' * Write
+	pushb 65
+	pushi 0
+	i2b
+	call orOf
+	outi
+
+#line 422
+	' * Write
+	pushb 10
+	outb
+
+
+#line 423
+	' * Write
+	pushi 0
+	i2b
+	pushi 0
+	i2b
+	call orOf
+	outi
+
+#line 423
+	' * Write
+	pushb 10
+	outb
+
+
+#line 427
+	call promoArgs
+
+
+#line 430
+	call mixedCmp
+
+
+#line 433
+	' * Assignment
+	pusha 2
+	pushf 1.5
+	storef
+
+
+#line 434
+	' * Write
+	pusha 2
+	loadf
+	outf
+
+#line 434
+	' * Write
+	pushb 10
+	outb
+
+
+#line 437
+	' * Assignment
+	pusha 2
+	pusha 0
+	loadi
+	i2f
+	storef
+
+
+#line 438
+	' * Write
+	pusha 2
+	loadf
+	f2i
+	outi
+
+#line 438
+	' * Write
+	pushb 10
+	outb
+
+
+#line 441
+	' * Assignment
+	pusha 2
+	pusha 6
+	loadb
+	b2i
+	i2f
+	storef
+
+
+#line 442
+	' * Write
+	pusha 2
+	loadf
+	f2i
+	outi
+
+#line 442
+	' * Write
+	pushb 10
+	outb
+
+
+#line 445
+	' * Write
+	pushf 0.0
+	pushf 3.5
+	subf
+	f2i
+	outi
+
+#line 445
+	' * Write
+	pushb 10
+	outb
+
+
+#line 448
+	' * Write
+	pushi 1
+	pushi 2
+	call myAdd
+	pushi 3
+	pushi 4
+	call myAdd
+	call myAdd
+	outi
+
+#line 448
+	' * Write
+	pushb 10
+	outb
+
+
+#line 451
+	' * Write
+	pushb 65
+	b2i
+	pushb 65
+	b2i
+	eqi
+	outi
+
+#line 451
+	' * Write
+	pushb 32
+	outb
+
+
+#line 452
+	' * Write
+	pushb 97
+	b2i
+	pushb 98
+	b2i
+	nei
+	outi
+
+#line 452
+	' * Write
+	pushb 10
+	outb
+
+	ret 0, 11, 0

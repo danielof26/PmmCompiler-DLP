@@ -1,0 +1,31 @@
+G:
+(1) FuncInvocation: expression1 -> expression2 expression*
+(2) FieldAccess: expression1 -> expression2 ID
+(3) ArrayAccess: expression1 -> expression2 expression3
+(4) Cast: expression1 -> type expression2
+(5) UnaryMinus: expression1 -> expression2
+(6) UnaryNot: expression1 -> expression2
+(7) Arithmetic: expression1 -> expression2 (+|-|*|/|%) expression3
+(8) Comparison: expression1 -> expression2 (>|>=|<|<=|!=|==) expression3
+(9) Logical: expression1 -> expression2 (&&|||) expression3
+(10) Variable: expression -> ID
+(11) IntLiteral: expression -> INT_CONSTANT
+(12) DoubleLiteral: expression -> DOUBLE_CONSTANT
+(13) CharLiteral: expression -> CHAR_CONSTANT
+
+A: { expression.type }
+
+R:
+(1) expression1.type = expression2.type.parenthesis(expression*.getTypes())
+(2) expression1.type = expression2.type.dot(ID)
+(3) expression1.type = expression2.type.squarebrackets(expression3.type)
+(4) expression1.type = expression2.type.canBeCastedTo(type)
+(5) expression1.type = expression2.type.arithmetic()
+(6) expression1.type = expression2.type.logic()
+(7) expression1.type = expression2.type.arithmetic(expression3.type)
+(8) expression1.type = expression2.type.comparison(expression3.type)
+(9) expression1.type = expression2.type.logic(expression3.type)
+(10) expression.type = expression.definition.type
+(11) expression.type = new IntType();
+(12) expression.type = new DoubleType();
+(13) expression.type = new CharType();

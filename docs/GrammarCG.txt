@@ -1,0 +1,167 @@
+//ADDRESS
+(1) Variable: expression -> ID
+(2) ArrayAccess: expression1 -> expression2 expression3
+(3) FieldAccess: expression1 -> expression2 ID
+
+
+(1)
+    scope == 0:
+        pusha offset
+    else
+        pushBP
+        pushX offset
+        add
+
+(2)
+    address_vector
+    value_index
+    push type_size
+    mul             (obtain positions to move)
+    add             (obtain element at i)
+
+(3)
+    address_struct
+    push element_offset
+    add
+
+
+
+//VALUE
+(1) FuncInvocation: expression1 -> expression2 expression*
+(2) FieldAccess: expression1 -> expression2 ID
+(3) ArrayAccess: expression1 -> expression2 expression3
+(4) Cast: expression1 -> type expression2
+(5) UnaryMinus: expression1 -> expression2
+(6) UnaryNot: expression1 -> expression2
+(7) Arithmetic: expression1 -> expression2 (+|-|*|/|%) expression3
+(8) Comparison: expression1 -> expression2 (>|>=|<|<=|!=|==) expression3
+(9) Logical: expression1 -> expression2 (&&|||) expression3
+(10) Variable: expression -> ID
+(11) IntLiteral: expression -> INT_CONSTANT
+(12) DoubleLiteral: expression -> DOUBLE_CONSTANT
+(13) CharLiteral: expression -> CHAR_CONSTANT
+
+(1)
+    push arg1
+    push arg2
+    push arg3
+    ...
+    push argN
+    call functionName
+
+(2)
+    address_struct
+    load
+
+(3)
+    address_array
+    load
+
+(4)
+    value_exp
+    b2i/i2f/f2i/i2b   (exp2.type + 2 + type)
+
+(5)
+    pushX 0(.0)     (checkear tipos)
+    value_exp
+    sub
+(6)
+    value_exp
+    not
+(7)
+    value_exp1
+    value_exp2
+    add/sub/mul/div/mod
+(8)
+    value_exp1
+    value_exp2
+    gt/lt/ge/le/eq/ne
+(9)
+    value_exp1
+    value_exp2
+    and/or
+(10)
+    address_variable
+    load
+(11)
+    pushi int
+(12)
+    pushf double
+(13)
+    pushb char
+
+//EXECUTE
+(1) Program: program -> definition*
+(2) VarDefinition: ID type
+(3) FuncDefinition: definition -> ID type statement*
+(4) FuncInvocation: statement -> expression expression*
+(5) Print: statement -> expression*
+(6) Input: statement -> expression*
+(7) Return: statement -> expression
+(8) While: statement -> expression statement*
+(9) Conditional: statement -> expression statement1* statement2*
+(10) Assignment: statement -> expression1 expression2
+
+
+(1)
+comment globals
+call main
+halt
+execute_definitions
+
+(2)
+comment locals
+
+(3)
+label funtionName
+comment params
+comment locals
+enter localBytesSum
+execute_statements
+ret
+
+(4)
+value_arg1
+value_arg2
+value_arg3
+...
+value_argN
+call functionName
+(pop)
+
+(5)
+value_exp
+out
+
+(6)
+address_exp
+in
+store
+
+(7)
+value_exp
+ret
+
+(8)
+label_condition
+    value_condition
+    jz label_end
+    execute_body
+    jmp label_condition
+label_end
+
+(9)
+value_condition
+jz label_else
+execute_if_body
+jmp label_end
+label_else
+    execute_else_body
+label_end
+
+(10)
+address_exp1
+value_exp2
+store
+
+

@@ -1,0 +1,453 @@
+
+# ============================================================
+# MASSIVE TEST — cubre TODA la funcionalidad del compilador
+# ============================================================
+
+# === GLOBALES: todos los tipos ===
+g_int:    int;
+g_double: double;
+g_char:   char;
+
+# Struct simple
+point: struct {
+    x: int;
+    y: int;
+};
+
+# Array de struct
+points: [4]struct {
+    x: int;
+    y: int;
+};
+
+# Struct con campo array
+bag: struct {
+    data: [3]int;
+    size: int;
+};
+
+# Struct con todos los tipos built-in
+container: struct {
+    a: int;
+    b: double;
+    c: char;
+};
+
+# Arrays
+arr1: [5]int;
+arr2: [3][4]int;
+
+
+# ============================================================
+# FUNCIONES
+# ============================================================
+
+def noop() -> None: {}
+
+def myAdd(a: int, b: int) -> int: {
+    return a + b;
+}
+
+def double_it(n: int) -> int: {
+    return myAdd(n, n);
+}
+
+def quad(n: int) -> int: {
+    return double_it(double_it(n));
+}
+
+def myMod(a: int, b: int) -> int: {
+    return a % b;
+}
+
+# Todos los operadores aritméticos
+def arithTest(a: int, b: int) -> None: {
+    r: int;
+    r = a + b; print r, ' ';
+    r = a - b; print r, ' ';
+    r = a * b; print r, ' ';
+    r = a / b; print r, ' ';
+    r = a % b; print r, '\n';
+}
+
+# Todos los operadores de comparación
+def cmpTest(a: int, b: int) -> None: {
+    print a < b,  ' ';
+    print a > b,  ' ';
+    print a <= b, ' ';
+    print a >= b, ' ';
+    print a == b, ' ';
+    print a != b, '\n';
+}
+
+# Operadores lógicos con int
+def logicTest(a: int, b: int) -> None: {
+    print a && b, ' ';
+    print a || b, ' ';
+    print !a,     ' ';
+    print !b,     '\n';
+}
+
+# Aritmética mixta: char, int, double
+def mixedArith() -> None: {
+    i: int;
+    d: double;
+    c: char;
+    i = 10;
+    d = 2.5;
+    c = 'A';
+    print (int)(i * d), ' ';
+    print c + i, ' ';
+    print c - 'a', '\n';
+}
+
+# Todos los casts
+def castTest() -> None: {
+    i: int;
+    d: double;
+    c: char;
+    i = 65;
+    c = (char)i;   print c, ' ';
+    d = (double)i;
+    i = (int)d;    print i, ' ';
+    i = (int)3.9;  print i, ' ';
+    c = (char)48;  print c, '\n';
+}
+
+# Aritmética double
+def scaleD(x: double, f: double) -> double: {
+    return x * f;
+}
+
+# Comparación double
+def cmpDouble(a: double, b: double) -> None: {
+    print a < b,  ' ';
+    print a > b,  ' ';
+    print a <= b, ' ';
+    print a >= b, '\n';
+}
+
+# Promoción implícita char en todas las operaciones
+def charOps(c: char) -> None: {
+    print c + 0,  ' ';
+    print !c,     ' ';
+    print -c,     '\n';
+}
+
+# charAsInt: return char implicitly promotes to int
+def charAsInt(c: char) -> int: {
+    return c;
+}
+
+# andOf char && char
+def andOf(a: char, b: char) -> int: {
+    return a && b;
+}
+
+# orOf: char || char  (prueba b2i antes de or — paralelo a andOf)
+def orOf(a: char, b: char) -> int: {
+    return a || b;
+}
+
+# Fibonacci iterativo
+def fibonacci(n: int) -> int: {
+    a, b, temp, i: int;
+    a = 0;
+    b = 1;
+    i = 0;
+    while i < n: {
+        temp = a + b;
+        a = b;
+        b = temp;
+        i = i + 1;
+    }
+    return a;
+}
+
+# Max de dos enteros (if/else con return en ambas ramas)
+def max(a: int, b: int) -> int: {
+    if a > b:
+        return a;
+    else:
+        return b;
+}
+
+# Clamp: if/else anidado
+def clamp(val: int, lo: int, hi: int) -> int: {
+    if val < lo: {
+        return lo;
+    }
+    else: {
+        if val > hi: {
+            return hi;
+        }
+        else: {
+            return val;
+        }
+    }
+}
+
+# Rellena arr1
+def fillArr1() -> None: {
+    i: int;
+    i = 0;
+    while i < 5: {
+        arr1[i] = i * i;
+        i = i + 1;
+    }
+}
+
+# Rellena arr2
+def fillArr2() -> None: {
+    i, j: int;
+    i = 0;
+    while i < 3: {
+        j = 0;
+        while j < 4: {
+            arr2[i][j] = i * 4 + j;
+            j = j + 1;
+        }
+        i = i + 1;
+    }
+}
+
+# Rellena array de struct
+def fillPoints() -> None: {
+    i: int;
+    i = 0;
+    while i < 4: {
+        points[i].x = i * 2;
+        points[i].y = i * 2 + 1;
+        i = i + 1;
+    }
+}
+
+# Rellena struct con campo array
+def fillBag() -> None: {
+    bag.data[0] = 10;
+    bag.data[1] = 20;
+    bag.data[2] = 30;
+    bag.size = 3;
+}
+
+# promoArgs: conversión implícita en argumentos de función
+# — char→int al pasar a myAdd (espera int)
+# — int→double al pasar a scaleD (espera double)
+# — char→double en asignación directa sin cast
+def promoArgs() -> None: {
+    d: double;
+    print myAdd('A', 1), '\n';
+    print (int)scaleD(3, 2), '\n';
+    d = 'A';
+    print (int)d, '\n';
+}
+
+# mixedCmp: comparación entre tipos distintos (superType + conversión antes de comparar)
+# int < double  → i2f sobre el int, luego ltf
+# char < int    → b2i sobre el char, luego lti
+def mixedCmp() -> None: {
+    print 3 < 3.5,   ' ';
+    print 4 > 3.5,   ' ';
+    print 'A' < 100, ' ';
+    print 'z' > 100, '\n';
+}
+
+# Input test (llama a esta funcion manualmente si quieres testar input)
+def testInput() -> None: {
+    i: int;
+    c: char;
+    input i;
+    input c;
+    print i, ' ', c, '\n';
+}
+
+
+# ============================================================
+# MAIN
+# ============================================================
+def main() -> None: {
+    i, j, r: int;
+    d: double;
+    c: char;
+
+    noop();
+
+    # 1. Aritmética entera: +, -, *, /, %
+    arithTest(17, 5);
+
+    # 2. Comparaciones enteras
+    cmpTest(3, 5);
+
+    # 3. Llamadas anidadas
+    print quad(3), '\n';
+
+    # 4. Fibonacci
+    i = 0;
+    while i < 8: {
+        print fibonacci(i), ' ';
+        i = i + 1;
+    }
+    print '\n';
+
+    # 5. Max y clamp
+    print max(7, 3),       ' ';
+    print max(-1, -5),     ' ';
+    print clamp(5, 0, 10), ' ';
+    print clamp(-3, 0, 10),' ';
+    print clamp(15, 0, 10),'\n';
+
+    # 6. Array 1D global
+    fillArr1();
+    i = 0;
+    while i < 5: {
+        print arr1[i], ' ';
+        i = i + 1;
+    }
+    print '\n';
+
+    # 7. Array 2D global
+    fillArr2();
+    i = 0;
+    while i < 3: {
+        j = 0;
+        while j < 4: {
+            print arr2[i][j], ' ';
+            j = j + 1;
+        }
+        print '\n';
+        i = i + 1;
+    }
+
+    # 8. Array de struct
+    fillPoints();
+    i = 0;
+    while i < 4: {
+        print points[i].x, ' ', points[i].y, '\n';
+        i = i + 1;
+    }
+
+    # 9. Struct con campo array + while sobre campo size
+    fillBag();
+    i = 0;
+    while i < bag.size: {
+        print bag.data[i], ' ';
+        i = i + 1;
+    }
+    print '\n';
+
+    # 10. Struct simple global
+    point.x = 100;
+    point.y = 200;
+    print point.x, ' ', point.y, '\n';
+
+    # 11. Globales escalares
+    g_int  = 42;
+    g_char = 'Z';
+    print g_int, ' ', g_char, '\n';
+
+    # 12. Struct con todos los tipos built-in
+    container.a = 7;
+    container.b = 2.5;
+    container.c = 'X';
+    print container.a, ' ', container.c, '\n';
+
+    # 13. Casts entre todos los tipos
+    castTest();
+
+    # 14. Aritmética mixta (char, int, double)
+    mixedArith();
+
+    # 15. Operadores lógicos con 0/1
+    logicTest(1, 0);
+
+    # 16. Aritmética double y cast a int
+    print (int)scaleD(3.0, 4.0), '\n';
+    print (int)scaleD(2.5, 2.0), '\n';
+
+    # 17. Comparaciones double
+    g_double = 3.14;
+    cmpDouble(3.14, 3.0);
+
+    # 18. Operaciones sobre char (promoción implícita)
+    charOps('a');
+
+    # 19. Return de char como int (promoción implícita en return)
+    print charAsInt('A'), '\n';
+
+    # 20. Logical con char operands (b2i antes del and/or)
+    print andOf('A', 'B'), '\n';
+
+    # 21. Mod
+    print myMod(17, 5), '\n';
+
+    # 22. Función como statement (descarta el return)
+    myAdd(5, 3);
+
+    # 23. Locales: todos los tipos
+    i = 99;
+    d = 1.5;
+    c = 'Q';
+    print i, ' ', c, '\n';
+    print (int)d, '\n';
+
+    # 24. If/else anidado triple
+    i = 42;
+    if i > 100: {
+        print 3, '\n';
+    }
+    else: {
+        if i > 50: {
+            print 2, '\n';
+        }
+        else: {
+            if i > 0: {
+                print 1, '\n';
+            }
+            else: {
+                print 0, '\n';
+            }
+        }
+    }
+
+    # 25. While con condicion compuesta (usando variable)
+    i = 1;
+    r = 0;
+    while i < 6: {
+        r = r + i;
+        i = i + 1;
+    }
+    print r, '\n';
+
+    # 26. char || char — prueba b2i antes de or
+    print orOf('A', (char)0), '\n';
+    print orOf((char)0, (char)0), '\n';
+
+    # 27. Conversión implícita en argumentos de función
+    #     char→int en myAdd, int→double en scaleD, char→double en asignación
+    promoArgs();
+
+    # 28. Comparación mixta: int vs double (i2f + ltf/gtf) y char vs int (b2i + lti)
+    mixedCmp();
+
+    # 29. Print directo de double (outf) — nunca probado antes
+    g_double = 1.5;
+    print g_double, '\n';
+
+    # 30. Asignación implícita int → double (debe emitir i2f)
+    g_double = g_int;
+    print (int)g_double, '\n';
+
+    # 31. Asignación implícita char → double (debe emitir b2i + i2f)
+    g_double = g_char;
+    print (int)g_double, '\n';
+
+    # 32. Unary minus con double (DoubleType.arithmetic devuelve DoubleType)
+    print (int)(-3.5), '\n';
+
+    # 33. Llamada anidada como argumento de otra función
+    print myAdd(myAdd(1, 2), myAdd(3, 4)), '\n';
+
+    # 34. Comparación de chars entre sí
+    print 'A' == 'A', ' ';
+    print 'a' != 'b', '\n';
+}

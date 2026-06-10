@@ -1,0 +1,34 @@
+G:
+  (1) FuncDefinition: funcdefinition → type ID vardefinition* statement*    #local variables
+  (2) FunctionType: type1 → type2 vardefinition*                            #function parameters
+  (3) Program: program → vardefinition* statement*                          #global variables
+  (4) VarDefinition: vardefinition → type ID
+  (5) StructType: type → field*                                             #record fields
+  (6) StructField: field → ID type
+
+A: {field.offset, vardefinition.offset}
+
+R:
+  (1) int localBytesSum = 0;
+      for(VarDefinition varDef : vardefinition*){
+        localBytesSum += varDef.getType().numberOfBytes();
+        varDef.setOffset(-localBytesSum);
+      }
+
+  (2) int paramBytesSum = 4;
+      for(VarDefinition varDef : vardefinition*.reversed()){
+        varDef.setOffset(paramBytesSum);
+        paramBytesSum += varDef.getType().numberOfBytes();
+      }
+
+  (3) int globalBytesSum = 0;
+      for(VarDefinition varDef : vardefinition*){
+        varDef.setOffset(globalBytesSum);
+        globalBytesSum += varDef.getType().numberOfBytes();
+      }
+
+    (5) int fieldBytesSum = 0;
+        for(StructField sf : field*){
+          sf.setOffset(fieldBytesSum);
+          fieldBytesSum += sf.getType().numberOfBytes();
+        }

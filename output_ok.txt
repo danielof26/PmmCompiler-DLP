@@ -1,0 +1,899 @@
+
+#source "conversions_ok.txt"
+
+	' * int i_var (offset 0)
+	' * char c_var (offset 2)
+	' * real r_var (offset 3)
+	' * array[int] arr_int (offset 7)
+	' * array[char] arr_char (offset 23)
+
+	' * Invocation to main function
+	call main
+halt
+
+
+#line 7
+
+ret_int_from_char:
+	' * Parameters
+	' * char x (offset 4)
+	' * Local variables
+	enter 0
+#line 7
+	' * Return
+	push bp
+	pushi 4
+	addi
+	loadb
+	b2i
+	ret 2, 0, 1
+
+
+#line 8
+
+ret_double_from_int:
+	' * Parameters
+	' * int x (offset 4)
+	' * Local variables
+	enter 0
+#line 8
+	' * Return
+	push bp
+	pushi 4
+	addi
+	loadi
+	i2f
+	ret 4, 0, 2
+
+
+#line 9
+
+ret_double_from_char:
+	' * Parameters
+	' * char x (offset 4)
+	' * Local variables
+	enter 0
+#line 9
+	' * Return
+	push bp
+	pushi 4
+	addi
+	loadb
+	b2i
+	i2f
+	ret 4, 0, 1
+
+
+#line 11
+
+param_int:
+	' * Parameters
+	' * int x (offset 4)
+	' * Local variables
+	enter 0
+
+#line 11
+	' * Write
+	push bp
+	pushi 4
+	addi
+	loadi
+	outi
+
+#line 11
+	' * Write
+	pushb 10
+	outb
+
+	ret 0, 0, 2
+
+#line 12
+
+param_double:
+	' * Parameters
+	' * real x (offset 4)
+	' * Local variables
+	enter 0
+
+#line 12
+	' * Write
+	push bp
+	pushi 4
+	addi
+	loadf
+	outf
+
+#line 12
+	' * Write
+	pushb 10
+	outb
+
+	ret 0, 0, 4
+
+#line 14
+
+main:
+	' * Parameters
+	' * Local variables
+	enter 0
+
+#line 17
+	' * Write
+	pushi 2
+	pushi 3
+	addi
+	outi
+
+#line 17
+	' * Write
+	pushb 10
+	outb
+
+
+#line 18
+	' * Write
+	pushi 2
+	pushb 97
+	b2i
+	addi
+	outi
+
+#line 18
+	' * Write
+	pushb 10
+	outb
+
+
+#line 19
+	' * Write
+	pushi 2
+	i2f
+	pushf 0.5
+	addf
+	outf
+
+#line 19
+	' * Write
+	pushb 10
+	outb
+
+
+#line 20
+	' * Write
+	pushb 97
+	b2i
+	pushb 98
+	b2i
+	addi
+	outi
+
+#line 20
+	' * Write
+	pushb 10
+	outb
+
+
+#line 21
+	' * Write
+	pushb 97
+	b2i
+	pushi 2
+	addi
+	outi
+
+#line 21
+	' * Write
+	pushb 10
+	outb
+
+
+#line 22
+	' * Write
+	pushb 97
+	b2i
+	i2f
+	pushf 0.5
+	addf
+	outf
+
+#line 22
+	' * Write
+	pushb 10
+	outb
+
+
+#line 23
+	' * Write
+	pushf 1.5
+	pushf 2.5
+	addf
+	outf
+
+#line 23
+	' * Write
+	pushb 10
+	outb
+
+
+#line 24
+	' * Write
+	pushf 1.5
+	pushi 2
+	i2f
+	addf
+	outf
+
+#line 24
+	' * Write
+	pushb 10
+	outb
+
+
+#line 25
+	' * Write
+	pushf 1.5
+	pushb 98
+	b2i
+	i2f
+	addf
+	outf
+
+#line 25
+	' * Write
+	pushb 10
+	outb
+
+
+#line 28
+	' * Write
+	pushi 0
+	pushi 5
+	subi
+	outi
+
+#line 28
+	' * Write
+	pushb 10
+	outb
+
+
+#line 29
+	' * Write
+	pushi 0
+	pushb 97
+	b2i
+	subi
+	outi
+
+#line 29
+	' * Write
+	pushb 10
+	outb
+
+
+#line 30
+	' * Write
+	pushf 0.0
+	pushf 1.5
+	subf
+	outf
+
+#line 30
+	' * Write
+	pushb 10
+	outb
+
+
+#line 33
+	' * Write
+	pushi 1
+	pushi 2
+	lti
+	outi
+
+#line 33
+	' * Write
+	pushb 10
+	outb
+
+
+#line 34
+	' * Write
+	pushi 1
+	pushb 98
+	b2i
+	lti
+	outi
+
+#line 34
+	' * Write
+	pushb 10
+	outb
+
+
+#line 35
+	' * Write
+	pushi 1
+	i2f
+	pushf 0.5
+	ltf
+	outi
+
+#line 35
+	' * Write
+	pushb 10
+	outb
+
+
+#line 36
+	' * Write
+	pushb 97
+	b2i
+	pushb 98
+	b2i
+	lti
+	outi
+
+#line 36
+	' * Write
+	pushb 10
+	outb
+
+
+#line 37
+	' * Write
+	pushb 97
+	b2i
+	pushi 98
+	lti
+	outi
+
+#line 37
+	' * Write
+	pushb 10
+	outb
+
+
+#line 38
+	' * Write
+	pushb 97
+	b2i
+	i2f
+	pushf 97.5
+	ltf
+	outi
+
+#line 38
+	' * Write
+	pushb 10
+	outb
+
+
+#line 39
+	' * Write
+	pushf 2.5
+	pushf 3.5
+	ltf
+	outi
+
+#line 39
+	' * Write
+	pushb 10
+	outb
+
+
+#line 40
+	' * Write
+	pushf 2.5
+	pushi 3
+	i2f
+	ltf
+	outi
+
+#line 40
+	' * Write
+	pushb 10
+	outb
+
+
+#line 41
+	' * Write
+	pushf 2.5
+	pushb 122
+	b2i
+	i2f
+	ltf
+	outi
+
+#line 41
+	' * Write
+	pushb 10
+	outb
+
+
+#line 44
+	' * Write
+	pushi 1
+	pushi 1
+	and
+	outi
+
+#line 44
+	' * Write
+	pushb 10
+	outb
+
+
+#line 45
+	' * Write
+	pushi 1
+	pushb 97
+	b2i
+	and
+	outi
+
+#line 45
+	' * Write
+	pushb 10
+	outb
+
+
+#line 46
+	' * Write
+	pushb 97
+	b2i
+	pushb 98
+	b2i
+	and
+	outi
+
+#line 46
+	' * Write
+	pushb 10
+	outb
+
+
+#line 47
+	' * Write
+	pushb 97
+	b2i
+	pushi 1
+	and
+	outi
+
+#line 47
+	' * Write
+	pushb 10
+	outb
+
+
+#line 48
+	' * Write
+	pushi 0
+	not
+	outi
+
+#line 48
+	' * Write
+	pushb 10
+	outb
+
+
+#line 49
+	' * Write
+	pushb 0
+	b2i
+	not
+	outi
+
+#line 49
+	' * Write
+	pushb 10
+	outb
+
+
+#line 52
+	' * Assignment
+	pusha 0
+	pushb 97
+	b2i
+	storei
+
+
+#line 53
+	' * Write
+	pusha 0
+	loadi
+	outi
+
+#line 53
+	' * Write
+	pushb 10
+	outb
+
+
+#line 54
+	' * Assignment
+	pusha 3
+	pushi 3
+	i2f
+	storef
+
+
+#line 55
+	' * Write
+	pusha 3
+	loadf
+	outf
+
+#line 55
+	' * Write
+	pushb 10
+	outb
+
+
+#line 56
+	' * Assignment
+	pusha 3
+	pushb 97
+	b2i
+	i2f
+	storef
+
+
+#line 57
+	' * Write
+	pusha 3
+	loadf
+	outf
+
+#line 57
+	' * Write
+	pushb 10
+	outb
+
+
+#line 60
+	' * Assignment
+	pusha 7
+	pushi 0
+	pushi 2
+	muli
+	addi
+	pushi 10
+	storei
+
+
+#line 61
+	' * Assignment
+	pusha 7
+	pushb 2
+	b2i
+	pushi 2
+	muli
+	addi
+	pushi 20
+	storei
+
+
+#line 62
+	' * Assignment
+	pusha 0
+	pushi 1
+	storei
+
+
+#line 63
+	' * Assignment
+	pusha 7
+	pusha 0
+	loadi
+	pushi 2
+	muli
+	addi
+	pushi 30
+	storei
+
+
+#line 64
+	' * Assignment
+	pusha 2
+	pushb 3
+	storeb
+
+
+#line 65
+	' * Assignment
+	pusha 7
+	pusha 2
+	loadb
+	b2i
+	pushi 2
+	muli
+	addi
+	pushi 40
+	storei
+
+
+#line 66
+	' * Write
+	pusha 7
+	pushi 0
+	pushi 2
+	muli
+	addi
+	loadi
+	outi
+
+#line 66
+	' * Write
+	pushb 10
+	outb
+
+
+#line 67
+	' * Write
+	pusha 7
+	pushb 2
+	b2i
+	pushi 2
+	muli
+	addi
+	loadi
+	outi
+
+#line 67
+	' * Write
+	pushb 10
+	outb
+
+
+#line 68
+	' * Write
+	pusha 7
+	pusha 0
+	loadi
+	pushi 2
+	muli
+	addi
+	loadi
+	outi
+
+#line 68
+	' * Write
+	pushb 10
+	outb
+
+
+#line 69
+	' * Write
+	pusha 7
+	pusha 2
+	loadb
+	b2i
+	pushi 2
+	muli
+	addi
+	loadi
+	outi
+
+#line 69
+	' * Write
+	pushb 10
+	outb
+
+
+#line 72
+	' * Write
+	pushb 97
+	b2i
+	outi
+
+#line 72
+	' * Write
+	pushb 10
+	outb
+
+
+#line 73
+	' * Write
+	pushf 1.9
+	f2i
+	outi
+
+#line 73
+	' * Write
+	pushb 10
+	outb
+
+
+#line 74
+	' * Write
+	pushi 65
+	i2b
+	outb
+
+#line 74
+	' * Write
+	pushb 10
+	outb
+
+
+#line 75
+	' * Write
+	pushf 65.9
+	f2i
+	i2b
+	outb
+
+#line 75
+	' * Write
+	pushb 10
+	outb
+
+
+#line 76
+	' * Write
+	pushi 2
+	i2f
+	outf
+
+#line 76
+	' * Write
+	pushb 10
+	outb
+
+
+#line 77
+	' * Write
+	pushb 97
+	b2i
+	i2f
+	outf
+
+#line 77
+	' * Write
+	pushb 10
+	outb
+
+
+#line 80
+	pushb 97
+	b2i
+	call param_int
+
+
+#line 81
+	pushi 3
+	i2f
+	call param_double
+
+
+#line 82
+	pushb 97
+	b2i
+	i2f
+	call param_double
+
+
+#line 85
+	' * Write
+	pushb 98
+	call ret_int_from_char
+	outi
+
+#line 85
+	' * Write
+	pushb 10
+	outb
+
+
+#line 86
+	' * Write
+	pushi 3
+	call ret_double_from_int
+	outf
+
+#line 86
+	' * Write
+	pushb 10
+	outb
+
+
+#line 87
+	' * Write
+	pushb 97
+	call ret_double_from_char
+	outf
+
+#line 87
+	' * Write
+	pushb 10
+	outb
+
+
+#line 90
+	' * Assignment
+	pusha 0
+	pushi 2
+	storei
+
+#line 91
+	' * While
+
+#line 91
+label_0:
+	pusha 0
+	loadi
+	pushi 0
+	gti
+	jz label_1
+	' * While body
+
+#line 92
+	' * Assignment
+	pusha 0
+	pusha 0
+	loadi
+	pushi 1
+	subi
+	storei
+	jmp label_0
+label_1:
+
+
+#line 94
+	' * Write
+	pusha 0
+	loadi
+	outi
+
+#line 94
+	' * Write
+	pushb 10
+	outb
+
+
+#line 96
+	' * Assignment
+	pusha 2
+	pushb 3
+	storeb
+
+#line 97
+	' * While
+
+#line 97
+label_2:
+	pusha 2
+	loadb
+	b2i
+	jz label_3
+	' * While body
+
+#line 98
+	' * Assignment
+	pusha 2
+	pusha 2
+	loadb
+	b2i
+	pushi 1
+	subi
+	i2b
+	storeb
+	jmp label_2
+label_3:
+
+
+#line 100
+	' * Write
+	pusha 2
+	loadb
+	outb
+
+#line 100
+	' * Write
+	pushb 10
+	outb
+
+	ret 0, 0, 0

@@ -1,0 +1,72 @@
+c: char;
+i: int;
+r: double;
+
+c2: char;
+i2: int;
+r2: double;
+
+def main() -> None: {
+
+    c = 'A';
+    i = 65;
+    r = 65.0;
+
+    # === Asignaciones directas (sin cast) ===
+
+    # 1. char = char  -> OK
+    c2 = c;
+
+    # 2. char = int   -> ERROR (int->char: perdida de informacion)
+    c2 = i;
+
+    # 3. char = double -> ERROR (double->char: perdida de informacion)
+    c2 = r;
+
+    # 4. int = char   -> OK (char->int: widening)
+    i2 = c;
+
+    # 5. int = int    -> OK
+    i2 = i;
+
+    # 6. int = double  -> ERROR (double->int: perdida de informacion)
+    i2 = r;
+
+    # 7. double = char -> OK (char->double: widening)
+    r2 = c;
+
+    # 8. double = int  -> OK (int->double: widening)
+    r2 = i;
+
+    # 9. double = double -> OK
+    r2 = r;
+
+    # === Asignaciones con cast explicito ===
+
+    # 10. char = (char)char   -> OK
+    c2 = (char)c;
+
+    # 11. char = (char)int    -> OK (cast permite la perdida)
+    c2 = (char)i;
+
+    # 12. char = (char)double -> OK (cast permite la perdida)
+    c2 = (char)r;
+
+    # 13. int = (int)char     -> OK
+    i2 = (int)c;
+
+    # 14. int = (int)int      -> OK
+    i2 = (int)i;
+
+    # 15. int = (int)double   -> OK (cast permite la perdida)
+    i2 = (int)r;
+
+    # 16. double = (double)char  -> OK
+    r2 = (double)c;
+
+    # 17. double = (double)int   -> OK
+    r2 = (double)i;
+
+    # 18. double = (double)double -> OK
+    r2 = (double)r;
+}

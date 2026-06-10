@@ -1,0 +1,152 @@
+
+#source "comparison_test.txt"
+
+
+	' * Invocation to main function
+	call main
+halt
+
+
+#line 1
+
+main:
+	' * Parameters
+	' * Local variables
+	' * int a (offset -2)
+	' * real b (offset -6)
+	' * char c (offset -7)
+	enter 7
+
+#line 7
+	' * Assignment
+	push bp
+	pushi -7
+	addi
+	pushb 106
+	storeb
+
+
+#line 9
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	pushi 0
+	push bp
+	pushi -7
+	addi
+	loadb
+	b2i
+	subi
+	storei
+
+
+#line 10
+	' * Assignment
+	push bp
+	pushi -2
+	addi
+	push bp
+	pushi -7
+	addi
+	loadb
+	b2i
+	not
+	storei
+
+#line 12
+	' * If
+
+#line 12
+	pushb 97
+	b2i
+	pushb 97
+	b2i
+	gti
+	pushi 5
+	and
+	pushb 115
+	b2i
+	or
+	jz label_0
+	' * if body
+
+
+#line 13
+	' * Write
+	pushb 97
+	outb
+	jmp label_1
+label_0:
+	' * else body
+
+label_1:
+
+#line 16
+	' * If
+
+#line 16
+	pushi 2
+	i2f
+	pushf 2.2
+	gtf
+	jz label_2
+	' * if body
+
+
+#line 17
+	' * Write
+	pushb 98
+	outb
+	jmp label_3
+label_2:
+	' * else body
+
+label_3:
+
+#line 20
+	' * If
+
+#line 20
+	pushi 96
+	pushb 97
+	b2i
+	gti
+	jz label_4
+	' * if body
+
+
+#line 21
+	' * Write
+	pushb 99
+	outb
+	jmp label_5
+label_4:
+	' * else body
+
+label_5:
+
+#line 24
+	' * If
+
+#line 24
+	pushb 97
+	b2i
+	i2f
+	pushf 2.2
+	gtf
+	jz label_6
+	' * if body
+
+
+#line 25
+	' * Write
+	pushb 100
+	outb
+	jmp label_7
+label_6:
+	' * else body
+
+label_7:
+
+	ret 0, 7, 0

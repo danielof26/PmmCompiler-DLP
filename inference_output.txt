@@ -1,0 +1,437 @@
+
+#source "test_inference.txt"
+
+	' * real r (offset 0)
+	' * char c (offset 4)
+	' * int i (offset 5)
+	' * struct{ int real } pair (offset 7)
+	' * array[int] arr (offset 13)
+
+	' * Invocation to main function
+	call main
+halt
+
+
+#line 12
+
+triple:
+	' * Parameters
+	' * int n (offset 4)
+	' * Local variables
+	enter 0
+#line 13
+	' * Return
+	push bp
+	pushi 4
+	addi
+	loadi
+	i2f
+	pushf 3.0
+	mulf
+	ret 4, 0, 2
+
+
+#line 16
+
+charToInt:
+	' * Parameters
+	' * char ch (offset 4)
+	' * Local variables
+	enter 0
+#line 17
+	' * Return
+	push bp
+	pushi 4
+	addi
+	loadb
+	b2i
+	ret 2, 0, 1
+
+
+#line 20
+
+main:
+	' * Parameters
+	' * Local variables
+	enter 0
+
+#line 21
+	' * Assignment
+	pusha 5
+	pushi 2
+	storei
+
+
+#line 22
+	' * Assignment
+	pusha 4
+	pushb 65
+	storeb
+
+
+#line 23
+	' * Assignment
+	pusha 0
+	pushf 0.5
+	storef
+
+
+#line 26
+	' * Write
+	pusha 4
+	loadb
+	b2i
+	pusha 5
+	loadi
+	addi
+	outi
+
+#line 26
+	' * Write
+	pushb 10
+	outb
+
+
+#line 29
+	' * Write
+	pusha 5
+	loadi
+	i2f
+	pusha 0
+	loadf
+	mulf
+	outf
+
+#line 29
+	' * Write
+	pushb 10
+	outb
+
+
+#line 32
+	' * Write
+	pusha 4
+	loadb
+	b2i
+	i2f
+	pusha 0
+	loadf
+	mulf
+	outf
+
+#line 32
+	' * Write
+	pushb 10
+	outb
+
+
+#line 35
+	' * Write
+	pusha 0
+	loadf
+	f2i
+	outi
+
+#line 35
+	' * Write
+	pushb 10
+	outb
+
+
+#line 38
+	' * Assignment
+	pusha 4
+	pusha 5
+	loadi
+	pushi 64
+	addi
+	i2b
+	storeb
+
+
+#line 39
+	' * Write
+	pusha 4
+	loadb
+	outb
+
+#line 39
+	' * Write
+	pushb 10
+	outb
+
+
+#line 42
+	' * Assignment
+	pusha 0
+	pusha 5
+	loadi
+	i2f
+	storef
+
+
+#line 43
+	' * Write
+	pusha 0
+	loadf
+	outf
+
+#line 43
+	' * Write
+	pushb 10
+	outb
+
+
+#line 46
+	' * Write
+	pusha 5
+	loadi
+	i2f
+	pushf 3.0
+	ltf
+	outi
+
+#line 46
+	' * Write
+	pushb 10
+	outb
+
+
+#line 49
+	' * Write
+	pusha 4
+	loadb
+	b2i
+	pushi 66
+	eqi
+	outi
+
+#line 49
+	' * Write
+	pushb 10
+	outb
+
+
+#line 52
+	' * Assignment
+	pusha 7
+	pushi 0
+	addi
+	pushi 10
+	storei
+
+
+#line 53
+	' * Assignment
+	pusha 7
+	pushi 2
+	addi
+	pushf 2.5
+	storef
+
+
+#line 54
+	' * Write
+	pusha 7
+	pushi 2
+	addi
+	loadf
+	pusha 7
+	pushi 0
+	addi
+	loadi
+	i2f
+	mulf
+	outf
+
+#line 54
+	' * Write
+	pushb 10
+	outb
+
+
+#line 57
+	' * Write
+	pushi 3
+	call triple
+	outf
+
+#line 57
+	' * Write
+	pushb 10
+	outb
+
+
+#line 60
+	' * Write
+	pushb 90
+	call charToInt
+	outi
+
+#line 60
+	' * Write
+	pushb 10
+	outb
+
+
+#line 63
+	' * Write
+	pushb 90
+	call charToInt
+	pusha 5
+	loadi
+	addi
+	outi
+
+#line 63
+	' * Write
+	pushb 10
+	outb
+
+
+#line 66
+	' * Write
+	pushi 0
+	pusha 5
+	loadi
+	subi
+	outi
+
+#line 66
+	' * Write
+	pushb 10
+	outb
+
+
+#line 69
+	' * Write
+	pushf 0.0
+	pusha 0
+	loadf
+	subf
+	outf
+
+#line 69
+	' * Write
+	pushb 10
+	outb
+
+
+#line 72
+	' * Write
+	pusha 4
+	loadb
+	b2i
+	pushi 1
+	addi
+	i2f
+	pusha 0
+	loadf
+	mulf
+	outf
+
+#line 72
+	' * Write
+	pushb 10
+	outb
+
+
+#line 77
+	' * Assignment
+	pusha 13
+	pushi 0
+	pushi 2
+	muli
+	addi
+	pushi 100
+	storei
+
+
+#line 78
+	' * Assignment
+	pusha 13
+	pushi 1
+	pushi 2
+	muli
+	addi
+	pushi 200
+	storei
+
+
+#line 79
+	' * Assignment
+	pusha 13
+	pushi 2
+	pushi 2
+	muli
+	addi
+	pushi 300
+	storei
+
+
+#line 83
+	' * Write
+	pusha 13
+	pusha 5
+	loadi
+	pushi 2
+	muli
+	addi
+	loadi
+	outi
+
+#line 83
+	' * Write
+	pushb 10
+	outb
+
+
+#line 88
+	' * Write
+	pusha 13
+	pusha 4
+	loadb
+	b2i
+	pushb 65
+	b2i
+	subi
+	pushi 2
+	muli
+	addi
+	loadi
+	outi
+
+#line 88
+	' * Write
+	pushb 10
+	outb
+
+
+#line 93
+	' * Write
+	pushi 0
+	pusha 4
+	loadb
+	subi
+	outi
+
+#line 93
+	' * Write
+	pushb 10
+	outb
+
+
+#line 98
+	' * Write
+	pushi 1
+	pusha 4
+	loadb
+	and
+	outi
+
+#line 98
+	' * Write
+	pushb 10
+	outb
+
+	ret 0, 0, 0

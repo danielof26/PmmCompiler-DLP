@@ -1,0 +1,45 @@
+# Test de errores de LValue para el compilador
+
+point: struct {
+    x: int;
+    y: int;
+};
+
+def main() -> None: {
+    i: int;
+    b: double;
+    arr: [10] int;
+    p = point;
+
+    # --- Errores en Asignación ---
+    
+    # Error 1: Literal a la izquierda
+    10 = i; 
+
+    # Error 2: Operación aritmética a la izquierda
+    (i + 2) = 5;
+
+    # Error 3: Resultado de un cast a la izquierda
+    (double)i = 3.5;
+
+    # Error 4: Llamada a función a la izquierda
+    # (Suponiendo que f() devuelve algo)
+    # f() = 10; 
+
+
+    # --- Errores en Input ---
+
+    # Error 5: Input en un literal
+    input 20;
+
+    # Error 6: Input en una expresión lógica
+    input (i > 0);
+
+
+    # --- Casos Correctos (No deberían dar error) ---
+    i = 10;
+    arr[0] = i;
+    p.x = 5;
+    input p.y;
+    input arr[i + 1];
+}

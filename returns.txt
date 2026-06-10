@@ -1,0 +1,103 @@
+c: char;
+i: int;
+r: double;
+
+# === Retornos directos (sin cast) ===
+
+# 1. -> char  return char  -> OK
+def ret_char_from_char() -> char: {
+    return c;
+}
+
+# 2. -> char  return int   -> ERROR (int->char: perdida de informacion)
+def ret_char_from_int() -> char: {
+    return i;
+}
+
+# 3. -> char  return double -> ERROR (double->char: perdida de informacion)
+def ret_char_from_double() -> char: {
+    return r;
+}
+
+# 4. -> int   return char  -> OK (widening: char->int)
+def ret_int_from_char() -> int: {
+    return c;
+}
+
+# 5. -> int   return int   -> OK
+def ret_int_from_int() -> int: {
+    return i;
+}
+
+# 6. -> int   return double -> ERROR (double->int: perdida de informacion)
+def ret_int_from_double() -> int: {
+    return r;
+}
+
+# 7. -> double return char  -> OK (widening: char->double)
+def ret_double_from_char() -> double: {
+    return c;
+}
+
+# 8. -> double return int   -> OK (widening: int->double)
+def ret_double_from_int() -> double: {
+    return i;
+}
+
+# 9. -> double return double -> OK
+def ret_double_from_double() -> double: {
+    return r;
+}
+
+# === Retornos con cast explicito ===
+
+# 10. -> char  return (char)char   -> OK
+def cast_char_from_char() -> char: {
+    return (char)c;
+}
+
+# 11. -> char  return (char)int    -> OK (cast permite la perdida)
+def cast_char_from_int() -> char: {
+    return (char)i;
+}
+
+# 12. -> char  return (char)double -> OK (cast permite la perdida)
+def cast_char_from_double() -> char: {
+    return (char)r;
+}
+
+# 13. -> int   return (int)char    -> OK
+def cast_int_from_char() -> int: {
+    return (int)c;
+}
+
+# 14. -> int   return (int)int     -> OK
+def cast_int_from_int() -> int: {
+    return (int)i;
+}
+
+# 15. -> int   return (int)double  -> OK (cast permite la perdida)
+def cast_int_from_double() -> int: {
+    return (int)r;
+}
+
+# 16. -> double return (double)char   -> OK
+def cast_double_from_char() -> double: {
+    return (double)c;
+}
+
+# 17. -> double return (double)int    -> OK
+def cast_double_from_int() -> double: {
+    return (double)i;
+}
+
+# 18. -> double return (double)double -> OK
+def cast_double_from_double() -> double: {
+    return (double)r;
+}
+
+def main() -> None: {
+    c = 'A';
+    i = 65;
+    r = 65.0;
+}

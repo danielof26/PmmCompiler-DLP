@@ -1,0 +1,101 @@
+i_var: int;
+c_var: char;
+r_var: double;
+arr_int: [8]int;
+arr_char: [4]char;
+
+def ret_int_from_char(x: char) -> int: { return x; }
+def ret_double_from_int(x: int) -> double: { return x; }
+def ret_double_from_char(x: char) -> double: { return x; }
+
+def param_int(x: int) -> None: { print x, '\n'; }
+def param_double(x: double) -> None: { print x, '\n'; }
+
+def main()->None: {
+
+    # === ARITMETICA: 9 combinaciones ===
+    print 2 + 3, '\n';        # int + int   -> int    = 5
+    print 2 + 'a', '\n';      # int + char  -> int    = 99
+    print 2 + 0.5, '\n';      # int + double-> double = 2.5
+    print 'a'+'b', '\n';      # char + char -> int    = 195
+    print 'a' + 2, '\n';      # char + int  -> int    = 99
+    print 'a' + 0.5, '\n';    # char + double-> double= 97.5
+    print 1.5 + 2.5, '\n';    # double+double-> double= 4.0
+    print 1.5 + 2, '\n';      # double + int -> double= 3.5
+    print 1.5 + 'b', '\n';    # double + char-> double= 99.5
+
+    # === MENOS UNARIO ===
+    print -5, '\n';            # -int    -> int    = -5
+    print -'a', '\n';          # -char   -> int    = -97
+    print -1.5, '\n';          # -double -> double = -1.5
+
+    # === COMPARACION: 9 combinaciones ===
+    print 1 < 2, '\n';         # int < int    -> int = 1
+    print 1 < 'b', '\n';       # int < char   -> int = 1  (1 < 98)
+    print 1 < 0.5, '\n';       # int < double -> int = 0  (1 > 0.5)
+    print 'a' < 'b', '\n';     # char < char  -> int = 1
+    print 'a' < 98, '\n';      # char < int   -> int = 1  (97 < 98)
+    print 'a' < 97.5, '\n';    # char < double-> int = 1  (97 < 97.5)
+    print 2.5 < 3.5, '\n';     # double<double-> int = 1
+    print 2.5 < 3, '\n';       # double < int -> int = 1
+    print 2.5 < 'z', '\n';     # double < char-> int = 1  (2.5 < 122)
+
+    # === LOGICA ===
+    print 1 && 1, '\n';        # int && int   -> int = 1
+    print 1 && 'a', '\n';      # int && char  -> int = 1
+    print 'a' && 'b', '\n';    # char && char -> int = 1
+    print 'a' && 1, '\n';      # char && int  -> int = 1
+    print !0, '\n';             # !int  -> int = 1
+    print !'\0', '\n';          # !char -> int = 1
+
+    # === ASIGNACION: promociones validas ===
+    i_var = 'a';                # char -> int
+    print i_var, '\n';          # = 97
+    r_var = 3;                  # int  -> double
+    print r_var, '\n';          # = 3.0
+    r_var = 'a';                # char -> double
+    print r_var, '\n';          # = 97.0
+
+    # === ACCESO A ARRAY: indice int y char ===
+    arr_int[0] = 10;
+    arr_int['\2'] = 20;         # char literal como indice
+    i_var = 1;
+    arr_int[i_var] = 30;        # int variable como indice
+    c_var = '\3';
+    arr_int[c_var] = 40;        # char variable como indice
+    print arr_int[0], '\n';     # = 10
+    print arr_int['\2'], '\n';  # = 20
+    print arr_int[i_var], '\n'; # = 30
+    print arr_int[c_var], '\n'; # = 40
+
+    # === CAST EXPLICITO: 6 cruces ===
+    print (int)'a', '\n';       # char   -> int    = 97
+    print (int)1.9, '\n';       # double -> int    = 1
+    print (char)65, '\n';       # int    -> char   = A
+    print (char)65.9, '\n';     # double -> char   = A (65)
+    print (double)2, '\n';      # int    -> double = 2.0
+    print (double)'a', '\n';    # char   -> double = 97.0
+
+    # === PARAMETROS: promociones validas ===
+    param_int('a');             # char -> int
+    param_double(3);            # int  -> double
+    param_double('a');          # char -> double
+
+    # === RETURN CON PROMOCION ===
+    print ret_int_from_char('b'), '\n';    # char -> int    = 98
+    print ret_double_from_int(3), '\n';    # int  -> double = 3.0
+    print ret_double_from_char('a'), '\n'; # char -> double = 97.0
+
+    # === CONDICION WHILE/IF CON int y char ===
+    i_var = 2;
+    while i_var > 0: {
+        i_var = i_var - 1;
+    }
+    print i_var, '\n';           # = 0
+
+    c_var = '\3';
+    while c_var: {               # char como condicion
+        c_var = (char)(c_var - 1);
+    }
+    print c_var, '\n';           # = '\0' -> 0
+}

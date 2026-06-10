@@ -1,0 +1,29 @@
+arr: [10]int;
+chars: [5]char;
+
+def main()->None: {
+    i: int;
+    c: char;
+
+    # Accesos con indice int literal
+    arr[0] = 7;
+    arr[2] = 3;
+    print arr[0], '\n';   # esperado: 7
+    print arr[2], '\n';   # esperado: 3
+
+    # Accesos con indice int variable
+    i = 2;
+    arr[i] = 99;
+    print arr[i], '\n';   # esperado: 99
+
+    # Accesos con indice char (promocion a int)
+    c = '\3';
+    arr[c] = 42;
+    print arr[c], '\n';   # esperado: 42
+
+    chars[c] = 'z';
+    print chars[c], '\n'; # esperado: z
+
+    arr['\4'] = 55;
+    print arr['\4'], '\n'; # esperado: 55  ('\4' = 4, dentro de bounds)
+}
